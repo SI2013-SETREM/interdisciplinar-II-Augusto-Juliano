@@ -7,5 +7,21 @@
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/SotosProductionOrder</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">Ric109au</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <mapping class="br.com.sotos.model.DrColecao"/>
+    <mapping class="br.com.sotos.model.DrCor"/>
+    <mapping class="br.com.sotos.model.DrEtapaProducao"/>
+    <mapping class="br.com.sotos.model.DrEtapasProduto"/>
+    <mapping class="br.com.sotos.model.DrLog"/>
+    <mapping class="br.com.sotos.model.DrOrdemProducao"/>
+    <mapping class="br.com.sotos.model.DrOrdemProdutos"/>
+    <mapping class="br.com.sotos.model.DrPessoas"/>
+    <mapping class="br.com.sotos.model.DrProduto"/>
+    <mapping class="br.com.sotos.model.DrProdutoCores"/>
+    <mapping class="br.com.sotos.model.DrProdutoFinal"/>
+    <mapping class="br.com.sotos.model.DrProdutoTamanho"/>
+    <mapping class="br.com.sotos.model.DrSetor"/>
+    <mapping class="br.com.sotos.model.DrTamanho"/>
   </session-factory>
 </hibernate-configuration>
