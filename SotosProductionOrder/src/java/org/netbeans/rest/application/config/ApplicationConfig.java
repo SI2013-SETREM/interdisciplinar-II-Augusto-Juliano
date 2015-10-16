@@ -29,7 +29,17 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(br.com.sotos.controller.DrColecaoController.class);
         resources.add(br.com.sotos.controller.DrCorController.class);
+        resources.add(br.com.sotos.controller.DrEtapaProducaoController.class);
+        resources.add(br.com.sotos.controller.DrEtapasProdutoController.class);
+        resources.add(br.com.sotos.controller.DrLogController.class);
+        resources.add(br.com.sotos.controller.DrOrdemProducaoController.class);
+        resources.add(br.com.sotos.controller.DrOrdemProdutosController.class);
+        resources.add(br.com.sotos.controller.DrPessoasController.class);
+        resources.add(br.com.sotos.controller.DrProdutoController.class);
+        resources.add(br.com.sotos.controller.DrProdutoCoresController.class);
+        resources.add(br.com.sotos.controller.DrProdutoFinalController.class);
     }
     
 }
