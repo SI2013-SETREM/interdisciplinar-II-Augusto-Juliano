@@ -1,7 +1,7 @@
 package br.com.sotos.controller;
 
-import br.com.sotos.DAO.DrCorDAO;
-import br.com.sotos.model.DrCor;
+import br.com.sotos.DAO.DrSetorDAO;
+import br.com.sotos.model.DrSetor;
 import com.google.gson.Gson;
 import java.util.List;
 import javax.ws.rs.GET;
@@ -14,57 +14,57 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Augusto
  */
-@Path("DrCorController")
-public class DrCorController {
+@Path("DrSetorController")
+public class DrSetorController {
 
-    private final DrCorDAO dao = new DrCorDAO(DrCor.class);
-    private final Gson gson = new Gson();    
-    
+    private final DrSetorDAO dao = new DrSetorDAO(DrSetor.class);
+    private final Gson gson = new Gson();
+
     @GET
     @Path("insert")
     @Produces(MediaType.APPLICATION_JSON)
     public String insert(@QueryParam("json") String json) {
-        DrCor drCor = gson.fromJson(json, DrCor.class);
-        dao.insert(drCor);
+        DrSetor drSetor = gson.fromJson(json, DrSetor.class);
+        dao.insert(drSetor);
 
-        return gson.toJson(drCor, DrCor.class);
+        return gson.toJson(drSetor, DrSetor.class);
     }
 
     @GET
     @Path("delete")
     @Produces(MediaType.APPLICATION_JSON)
     public String delete(@QueryParam("json") String json) {
-        DrCor drCor = gson.fromJson(json, DrCor.class);
-        dao.delete(drCor);
- 
-       return gson.toJson(drCor, DrCor.class);
+        DrSetor drSetor = gson.fromJson(json, DrSetor.class);
+        dao.delete(drSetor);
+
+        return gson.toJson(drSetor, DrSetor.class);
     }
 
     @GET
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
     public String update(@QueryParam("json") String json) {
-        DrCor drCor = gson.fromJson(json, DrCor.class);
-        dao.update(drCor);
+        DrSetor drSetor = gson.fromJson(json, DrSetor.class);
+        dao.update(drSetor);
 
-        return gson.toJson(drCor, DrCor.class);
+        return gson.toJson(drSetor, DrSetor.class);
     }
 
     @GET
     @Path("findById")
     @Produces(MediaType.APPLICATION_JSON)
     public String findById(@QueryParam("id") int id) {
-        DrCor drCor = dao.findById(id);
+        DrSetor drSetor = dao.findById(id);
 
-        return gson.toJson(drCor, DrCor.class);
+        return gson.toJson(drSetor, DrSetor.class);
     }
 
     @GET
     @Path("findAll")
     @Produces(MediaType.APPLICATION_JSON)
     public String findByAll() {
-        List<DrCor> lstDrCor = dao.findAll();
+        List<DrSetor> lstDrSetor = dao.findAll();
 
-        return gson.toJson(lstDrCor);
+        return gson.toJson(lstDrSetor);
     }
 }

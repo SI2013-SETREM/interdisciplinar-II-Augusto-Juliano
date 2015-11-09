@@ -40,6 +40,9 @@ public class ApplicationConfig extends Application {
         resources.add(br.com.sotos.controller.DrProdutoController.class);
         resources.add(br.com.sotos.controller.DrProdutoCoresController.class);
         resources.add(br.com.sotos.controller.DrProdutoFinalController.class);
+        resources.add(br.com.sotos.controller.DrProdutoTamanhoController.class);
+        resources.add(br.com.sotos.controller.DrSetorController.class);
+        resources.add(br.com.sotos.controller.DrTamanhoController.class);
     }
     
 }

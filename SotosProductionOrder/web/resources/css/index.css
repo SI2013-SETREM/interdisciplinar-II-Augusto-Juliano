@@ -80,8 +80,19 @@
         background-image: none
     }
 }
+@font-face {
+    font-family: "brandon-regular";
+    src: url("../fonts/brandon-regular.eot");
+    src: url("../fonts/brandon-regular.eot?#iefix") format("embedded-opentype"),
+        url("../fonts/brandon-regular.woff2") format("woff2"),
+        url("../fonts/brandon-regular.woff") format("woff"),
+        url("../fonts/brandon-regular.ttf") format("truetype"),
+        url("../fonts/brandon-regular.svg#brandon-regular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
 * {
-    font: normal 14px/18px "helvetica-neue", Arial, Helvetica;
+    font: normal 14px/18px "brandon-regular", Arial, Helvetica;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     list-style: none;
@@ -95,7 +106,7 @@
 body {
     background: #F1F1F1;
     overflow-x: hidden;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'brandon-regular', sans-serif;
 }
 body.ie8 .simple-popup .dimming {
     background: transparent
@@ -3618,7 +3629,7 @@ body.home .banner .testimonial-intro {
     left: 78px
 }
 body.home .banner .testimonial-intro h2 {
-    font: 36px/37px;
+    font: 36px/37px "brandon-regular";
     color: #FFF;
     width: 420px;
     letter-spacing: -1px;
