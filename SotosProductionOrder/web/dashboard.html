@@ -167,7 +167,7 @@
                                 <li ng-click="activetab = 'produtos';" ng-class="{'active': activetab === 'produtos'}">
                                     <a href="#"><i class="fa fa-fw fa-tag"></i> Produtos</a>
                                 </li>
-                                <li ng-click="activetab = 'tamanhos';" ng-class="{'active': activetab === 'tamanhos'}">
+                                <li ng-click="requestPage('lst/drTamanhoLst'); activetab = 'tamanhos';" ng-class="{'active': activetab === 'tamanhos'}">
                                     <a href="#"><i class="fa fa-fw fa-text-height"></i> Tamanhos</a>
                                 </li>
                             </ul>
@@ -192,6 +192,7 @@
             <div id="page-wrapper">
 
                 <div class="container-fluid">
+                    <!-- content-page é a div que será substituída pelo Angular -->
                     <div id="content-page">
                         <!-- Page Heading -->
                         <div class="row">

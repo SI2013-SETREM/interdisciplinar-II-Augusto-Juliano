@@ -82,3 +82,73 @@ app.controller("drCorController", function ($scope, $http) {
 
     $scope.loadDrCorLst();
 });
+
+app.controller("drTamanhoController", function ($scope, $http) {
+    $scope.drTamanhoLst = [];
+    $scope.sortType = "tam_ordem";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drTamanho = $scope.$parent.model;
+
+    $scope.loadDrTamanhoLst = function () {
+        $http.get("ws/DrTamanhoController/findAll", {method: "GET"}).then(function (response) {
+            $scope.drTamanhoLst = response.data;
+        });
+    };
+
+    $scope.delete = function (drTamanho) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrTamanhoController/delete",
+                    params: {
+                        json: drTamanho
+                    }
+                }).then(function (response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                        $scope.loadDrTamanhoLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function (drTamanho) {
+        if (drTamanho.tam_codigo === undefined) {
+            $scope.insert(drTamanho);
+        } else {
+            $scope.update(drTamanho);
+        }
+    };
+
+    $scope.insert = function (drTamanho) {
+        $http({
+            method: "GET",
+            url: "ws/DrTamanhoController/insert",
+            params: {
+                json: drTamanho
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro inserido com Sucesso!", function () {
+                $scope.requestPage('lst/drTamanhoLst');
+            });
+        });
+    };
+
+    $scope.update = function (drTamanho) {
+        $http({
+            method: "GET",
+            url: "ws/DrTamanhoController/update",
+            params: {
+                json: drTamanho
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro alterado com Sucesso!", function () {
+                $scope.requestPage('lst/drTamanhoLst');
+            });
+        });
+    };
+
+    $scope.loadDrTamanhoLst();
+});
