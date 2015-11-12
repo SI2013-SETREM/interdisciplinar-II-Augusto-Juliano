@@ -1,0 +1,32 @@
+<div ng-controller="drColecaoController">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Coleção
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="index.html">Início</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Coleção
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <form role="form">
+                <input class="form-control hidden" value="0" ng-model="drColecao.col_codigo" id="col_codigo">
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <input class="form-control" ng-model="drColecao.col_descricao" id="col_descricao">
+                    <input type="checkbox" style="float: left;" ng-model="drColecao.col_status" id="col_status" />
+                </div>
+
+                <input type="button" value="Salvar" ng-click="save(drColecao);" class="btn btn-primary">
+                <input type="button" value="Cancelar" ng-click="requestPage('lst/drColecaoLst');" class="btn btn-default">
+            </form>
+        </div>
+    </div>
+</div>

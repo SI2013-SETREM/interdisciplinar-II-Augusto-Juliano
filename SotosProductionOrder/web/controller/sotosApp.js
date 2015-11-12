@@ -152,3 +152,73 @@ app.controller("drTamanhoController", function ($scope, $http) {
 
     $scope.loadDrTamanhoLst();
 });
+
+app.controller("drColecaoController", function ($scope, $http) {
+    $scope.drColecaoLst = [];
+    $scope.sortType = "col_descricao";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drColecao = $scope.$parent.model;
+
+    $scope.loadDrColecaoLst = function () {
+        $http.get("ws/DrColecaoController/findAll", {method: "GET"}).then(function (response) {
+            $scope.drColecaoLst = response.data;
+        });
+    };
+
+    $scope.delete = function (drColecao) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrColecaoController/delete",
+                    params: {
+                        json: drColecao
+                    }
+                }).then(function (response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                        $scope.loadDrColecaoLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function (drColecao) {
+        if (drColecao.col_codigo === undefined) {
+            $scope.insert(drColecao);
+        } else {
+            $scope.update(drColecao);
+        }
+    };
+
+    $scope.insert = function (drColecao) {
+        $http({
+            method: "GET",
+            url: "ws/DrColecaoController/insert",
+            params: {
+                json: drColecao
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro inserido com Sucesso!", function () {
+                $scope.requestPage('lst/drColecaoLst');
+            });
+        });
+    };
+
+    $scope.update = function (drColecao) {
+        $http({
+            method: "GET",
+            url: "ws/DrColecaoController/update",
+            params: {
+                json: drColecao
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro alterado com Sucesso!", function () {
+                $scope.requestPage('lst/drColecaoLst');
+            });
+        });
+    };
+
+    $scope.loadDrColecaoLst();
+});
