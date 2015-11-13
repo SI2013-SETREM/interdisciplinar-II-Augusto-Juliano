@@ -222,3 +222,82 @@ app.controller("drColecaoController", function ($scope, $http) {
 
     $scope.loadDrColecaoLst();
 });
+
+
+app.controller("drProdutoController", function ($scope, $http) {
+    $scope.drProdutoLst = [];
+    $scope.drColecaoLst = [];
+    $scope.sortType = "pro_codigo";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drProduto = $scope.$parent.model;
+
+    $scope.loadDrProdutoLst = function () {
+        $http.get("ws/DrProdutoController/findAll", {method: "GET"}).then(function (response) {
+            $scope.drProdutoLst = response.data;
+        });
+    };
+
+    $scope.loadDrColecaoLst = function () {
+        $http.get("ws/DrColecaoController/findAll", {method: "GET"}).then(function (response) {
+            $scope.drColecaoLst = response.data;
+        });
+    };
+
+    $scope.delete = function (drProduto) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrProdutoController/delete",
+                    params: {
+                        json: drProduto
+                    }
+                }).then(function (response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                        $scope.loadDrProdutoLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function (drProduto) {
+        if (drProduto.pro_codigo === undefined) {
+            $scope.insert(drProduto);
+        } else {
+            $scope.update(drProduto);
+        }
+    };
+
+    $scope.insert = function (drProduto) {
+        $http({
+            method: "GET",
+            url: "ws/DrProdutoController/insert",
+            params: {
+                json: drProduto
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro inserido com Sucesso!", function () {
+                $scope.requestPage('lst/drProdutoLst');
+            });
+        });
+    };
+
+    $scope.update = function (drProduto) {
+        $http({
+            method: "GET",
+            url: "ws/DrProdutoController/update",
+            params: {
+                json: drProduto
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro alterado com Sucesso!", function () {
+                $scope.requestPage('lst/drProdutoLst');
+            });
+        });
+    };
+
+    $scope.loadDrProdutoLst();
+    $scope.loadDrColecaoLst();
+});

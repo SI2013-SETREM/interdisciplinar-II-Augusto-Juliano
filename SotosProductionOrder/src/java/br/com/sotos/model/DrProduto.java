@@ -24,6 +24,15 @@ public class DrProduto implements Serializable {
     private int pro_codigo;
     private String pro_descricao;
     private double pro_valorvenda;
+    private int pro_codigopro;
+
+    public int getPro_codigopro() {
+        return pro_codigopro;
+    }
+
+    public void setPro_codigopro(int pro_codigopro) {
+        this.pro_codigopro = pro_codigopro;
+    }
 
     @ManyToOne
     @JoinColumn(name = "col_codigo", referencedColumnName = "col_codigo")

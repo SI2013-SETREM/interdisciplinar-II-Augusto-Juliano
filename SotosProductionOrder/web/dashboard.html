@@ -164,7 +164,8 @@
                                             activetab = 'cores';" ng-class="{'active': activetab === 'cores'}">
                                     <a href="#"><i class="fa fa-fw fa-bookmark-o"></i> Cores</a>
                                 </li>
-                                <li ng-click="activetab = 'produtos';" ng-class="{'active': activetab === 'produtos'}">
+                                <li ng-click="requestPage('lst/drProdutoLst');
+                                    activetab = 'produtos';" ng-class="{'active': activetab === 'produtos'}">
                                     <a href="#"><i class="fa fa-fw fa-tag"></i> Produtos</a>
                                 </li>
                                 <li ng-click="requestPage('lst/drTamanhoLst'); activetab = 'tamanhos';" ng-class="{'active': activetab === 'tamanhos'}">
