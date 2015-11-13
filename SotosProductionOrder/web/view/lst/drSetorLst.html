@@ -1,14 +1,13 @@
-<a href="#" class="btn btn-danger btn-lg" ng-click="requestPage('frm/drCorFrm', 'cores')" style="border-radius: 50%; position: absolute; bottom: 0px; right: 0; z-index: 999999999; margin: 15px;">+</a>
-
-<div ng-controller="drCorController">
+<a href="#" class="btn btn-danger btn-lg" ng-click="requestPage('frm/drSetorFrm', 'setores')" style="border-radius: 50%; position: absolute; bottom: 0px; right: 0; z-index: 999999999; margin: 15px;">+</a>
+<div ng-controller="drSetorController">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Cores
+                Setores
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-bookmark-o"></i> Cor
+                    <i class="fa fa-bookmark-o"></i> Setor
                 </li>
             </ol>
         </div>
@@ -32,19 +31,11 @@
                     <thead>
                         <tr>
                             <th>
-                                <a href="#" ng-click="sortType = 'cor_codigocor';
-                                            sortReverse = !sortReverse">
-                                    Código
-                                    <span ng-show="sortType === 'cor_codigocor' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType === 'cor_codigocor' && sortReverse" class="fa fa-caret-up"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a href="#" ng-click="sortType = 'cor_descricao';
+                                <a href="#" ng-click="sortType = 'set_descricao';
                                             sortReverse = !sortReverse">
                                     Descrição
-                                    <span ng-show="sortType === 'cor_descricao' && !sortReverse" class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType === 'cor_descricao' && sortReverse" class="fa fa-caret-up"></span>
+                                    <span ng-show="sortType === 'set_descricao' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'set_descricao' && sortReverse" class="fa fa-caret-up"></span>
                                 </a>
                             </th>
                             <th class="col-button-header">Editar</th>
@@ -52,16 +43,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="drCor in drCorLst| orderBy:sortType:sortReverse | filter:search">
-                            <td>{{drCor.cor_codigocor}}</td>
-                            <td>{{drCor.cor_descricao}}</td>
+                        <tr ng-repeat="drSetor in drSetorLst| orderBy:sortType:sortReverse | filter:search">
+                            <td>{{drSetor.set_descricao}}</td>
                             <td class="text-center">
-                                <a href="#"  ng-click="requestPage('frm/drCorFrm', 'cores', drCor);">
+                                <a href="#"  ng-click="requestPage('frm/drSetorFrm', 'setores', drSetor);">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a href="#" ng-click="delete(drCor);">
+                                <a href="#" ng-click="delete(drSetor);">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>

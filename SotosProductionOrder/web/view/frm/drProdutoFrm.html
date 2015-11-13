@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label>Coleção</label>
                     <select class="form-control" ng-model="drProduto.DrColecao.cor_codigo" id="col_codigo">
-                        <option ng-repeat="drColecao in drColecaoLst| orderBy:'col_descricao'" value="{{drColecao.cor_codigo}}">{{drColecao.col_descricao}}</option>
+                        <option ng-repeat="drColecao in drColecaoLst| orderBy:'col_descricao'" value="{{drProduto.drColecao}}">{{drColecao.col_descricao}}</option>
                     </select>
                 </div>
                 <input type="button" value="Salvar" ng-click="save(drProduto);" onclick="this.disabled = true;" class="btn btn-primary">

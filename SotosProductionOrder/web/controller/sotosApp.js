@@ -223,6 +223,76 @@ app.controller("drColecaoController", function ($scope, $http) {
     $scope.loadDrColecaoLst();
 });
 
+app.controller("drSetorController", function ($scope, $http) {
+    $scope.drSetorLst = [];
+    $scope.sortType = "set_descricao";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drSetor = $scope.$parent.model;
+
+    $scope.loadDrSetorLst = function () {
+        $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function (response) {
+            $scope.drSetorLst = response.data;
+        });
+    };
+
+    $scope.delete = function (drSetor) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrSetorController/delete",
+                    params: {
+                        json: drSetor
+                    }
+                }).then(function (response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                        $scope.loadDrSetorLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function (drSetor) {
+        if (drSetor.set_codigo === undefined) {
+            $scope.insert(drSetor);
+        } else {
+            $scope.update(drSetor);
+        }
+    };
+
+    $scope.insert = function (drSetor) {
+        $http({
+            method: "GET",
+            url: "ws/DrSetorController/insert",
+            params: {
+                json: drSetor
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro inserido com Sucesso!", function () {
+                $scope.requestPage('lst/drSetorLst');
+            });
+        });
+    };
+
+    $scope.update = function (drSetor) {
+        $http({
+            method: "GET",
+            url: "ws/DrSetorController/update",
+            params: {
+                json: drSetor
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro alterado com Sucesso!", function () {
+                $scope.requestPage('lst/drSetorLst');
+            });
+        });
+    };
+
+    $scope.loadDrSetorLst();
+});
+
 
 app.controller("drProdutoController", function ($scope, $http) {
     $scope.drProdutoLst = [];
