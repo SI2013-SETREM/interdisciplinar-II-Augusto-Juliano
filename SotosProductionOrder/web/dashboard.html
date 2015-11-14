@@ -147,10 +147,12 @@
                         <li ng-click="activetab = 'dashboard';" ng-class="{'active': activetab === 'dashboard' || activetab === undefined}">
                             <a href="#"><i class="fa fa-fw fa-dashboard"></i> Painel de Produção</a>
                         </li>
-                        <li ng-click="activetab = 'pessoas';" ng-class="{'active': activetab === 'pessoas'}">
+                        <li ng-click="requestPage('lst/drPessoasLst');
+                            activetab = 'pessoas';" ng-class="{'active': activetab === 'pessoas'}">
                             <a href="#"><i class="fa fa-fw fa-group"></i> Pessoas</a>
                         </li>
-                        <li ng-click="activetab = 'setores';" ng-class="{'active': activetab === 'setores'}">
+                        <li ng-click="requestPage('lst/drSetorLst');
+                            activetab = 'setores';" ng-class="{'active': activetab === 'setores'}">
                             <a href="#"><i class="fa fa-fw fa-sitemap"></i> Setores</a>
                         </li>
                         <li>

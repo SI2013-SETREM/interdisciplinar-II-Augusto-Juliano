@@ -1,0 +1,119 @@
+<a href="#" class="btn btn-danger btn-lg" ng-click="requestPage('frm/drPessoasFrm', 'pessoas')" style="border-radius: 50%; position: absolute; bottom: 0px; right: 0; z-index: 999999999; margin: 15px;">+</a>
+
+<div ng-controller="drPessoasController">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Colaboradores
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-bookmark-o"></i> Colaboradores
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Pesquise pelo Nome" ng-model="search">
+                    </div>      
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pes_nome';
+                                            sortReverse = !sortReverse">
+                                    Nome Completo
+                                    <span ng-show="sortType === 'pes_nome' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pes_nome' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pes_cpf';
+                                            sortReverse = !sortReverse">
+                                    CPF
+                                    <span ng-show="sortType === 'pes_cpf' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pes_cpf' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pes_rg';
+                                            sortReverse = !sortReverse">
+                                    RG
+                                    <span ng-show="sortType === 'pes_rg' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pes_rg' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'set_codigo';
+                                            sortReverse = !sortReverse">
+                                    Setor
+                                    <span ng-show="sortType === 'set_codigo' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'set_codigo' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pes_nivelacesso';
+                                            sortReverse = !sortReverse">
+                                    Nível de Acesso
+                                    <span ng-show="sortType === 'pes_nivelacesso' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pes_nivelacesso' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pes_login';
+                                            sortReverse = !sortReverse">
+                                    Usuário
+                                    <span ng-show="sortType === 'pes_login' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pes_login' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pes_status';
+                                            sortReverse = !sortReverse">
+                                    Status
+                                    <span ng-show="sortType === 'pes_status' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pes_status' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th class="col-button-header">Editar</th>
+                            <th class="col-button-header">Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="drPessoas in drPessoasLst| orderBy:sortType:sortReverse | filter:search">
+                            <td>{{drPessoas.pes_nome}}</td>
+                            <td>{{drPessoas.pes_cpf}}</td>
+                            <td>{{drPessoas.pes_rg}}</td>
+                            <td>{{drPessoas.drSetor.set_descricao}}</td>
+                            <td>{{drPessoas.pes_nivelacesso}}</td>
+                            <td>{{drPessoas.pes_login}}</td>
+                            <td>{{drPessoas.pes_status == true ? 'Ativo' : 'Inativo'}}</td>
+                            <td class="text-center">
+                                <a href="#"  ng-click="requestPage('frm/drPessoasFrm', 'pessoas', drPessoas);">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="#" ng-click="delete(drPessoas);">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

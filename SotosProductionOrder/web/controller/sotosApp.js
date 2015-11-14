@@ -371,3 +371,81 @@ app.controller("drProdutoController", function ($scope, $http) {
     $scope.loadDrProdutoLst();
     $scope.loadDrColecaoLst();
 });
+
+app.controller("drPessoasController", function ($scope, $http) {
+    $scope.drPessoasLst = [];
+    $scope.drSetorLst = [];
+    $scope.sortType = "pes_nome";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drPessoas = $scope.$parent.model;
+
+    $scope.loadDrPessoasLst = function () {
+        $http.get("ws/DrPessoasController/findAll", {method: "GET"}).then(function (response) {
+            $scope.drPessoasLst = response.data;
+        });
+    };
+
+    $scope.loadDrSetorLst = function () {
+        $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function (response) {
+            $scope.drSetorLst = response.data;
+        });
+    };
+
+    $scope.delete = function (drPessoas) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrPessoasController/delete",
+                    params: {
+                        json: drPessoas
+                    }
+                }).then(function (response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                        $scope.loadDrPessoasLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function (drPessoas) {
+        if (drPessoas.pes_codigo === undefined) {
+            $scope.insert(drPessoas);
+        } else {
+            $scope.update(drPessoas);
+        }
+    };
+
+    $scope.insert = function (drPessoas) {
+        $http({
+            method: "GET",
+            url: "ws/DrPessoasController/insert",
+            params: {
+                json: drPessoas
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro inserido com Sucesso!", function () {
+                $scope.requestPage('lst/drPessoasLst');
+            });
+        });
+    };
+
+    $scope.update = function (drPessoas) {
+        $http({
+            method: "GET",
+            url: "ws/DrPessoasController/update",
+            params: {
+                json: drPessoas
+            }
+        }).then(function (response) {
+            bootbox.alert("Registro alterado com Sucesso!", function () {
+                $scope.requestPage('lst/drPessoasLst');
+            });
+        });
+    };
+
+    $scope.loadDrPessoasLst();
+    $scope.loadDrSetorLst();
+});

@@ -28,7 +28,7 @@ public class DrPessoas implements Serializable {
     private DrSetor drSetor;
 
     private String pes_nome;
-    private String pes_cpfcnpj;
+    private String pes_cpf;
     private String pes_rg;
     private String pes_email;
     private String pes_login;
@@ -60,12 +60,12 @@ public class DrPessoas implements Serializable {
         this.pes_nome = pes_nome;
     }
 
-    public String getPes_cpfcnpj() {
-        return pes_cpfcnpj;
+    public String getPes_cpf() {
+        return pes_cpf;
     }
 
-    public void setPes_cpfcnpj(String pes_cpfcnpj) {
-        this.pes_cpfcnpj = pes_cpfcnpj;
+    public void setPes_cpf(String pes_cpfcnpj) {
+        this.pes_cpf = pes_cpfcnpj;
     }
 
     public String getPes_rg() {
@@ -108,8 +108,16 @@ public class DrPessoas implements Serializable {
         this.pes_status = pes_status;
     }
 
-    public short getPes_nivelacesso() {
-        return pes_nivelacesso;
+    public String getPes_nivelacesso() {
+        if (pes_nivelacesso == 1) {
+            return "Gerente de Produção";
+        } else if (pes_nivelacesso == 2) {
+            return "Gerente de Setor";
+        } else if (pes_nivelacesso == 3) {
+            return "Chefe de Produção";
+        } else {
+            return "Falha na Leitura";
+        }
     }
 
     public void setPes_nivelacesso(short pes_nivelacesso) {
