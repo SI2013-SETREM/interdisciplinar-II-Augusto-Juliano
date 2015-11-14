@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                     <label>Setor</label>
-                    <select class="form-control" ng-model="drPessoas.drSetor" ng-options="drSetor.set_descricao for drSetor in drSetorLst" />
+                    <select class="form-control" ng-model="drPessoas.drSetor" ng-options="drSetor.set_descricao for drSetor in drSetorLst track by drSetor.set_codigo"></select>
                 </div>
                 <div class="form-group">
                     <label>Nível de Acesso</label>

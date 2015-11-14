@@ -20,7 +20,7 @@
                 <input class="form-control hidden" ng-model="drProduto.pro_codigo" id="pro_codigo">
                 <div class="form-group">
                     <label>Referência</label>
-                    <input class="form-control" type='number' min="1" max="99999999" value="0" ng-model="drProduto.pro_codigopro" id="pro_codigopro">
+                    <input class="form-control" type="number" min="1" ng-model="drProduto.pro_codigopro" id="pro_codigopro">
                 </div>
                 <div class="form-group">
                     <label>Descrição</label>
@@ -28,11 +28,11 @@
                 </div>
                 <div class="form-group">
                     <label>Valor de Venda</label>
-                    <input class="form-control" type='number' min="1" max="999999" step="0.1" ng-model="drProduto.pro_valorvenda" id="pro_valorvenda">
+                    <input class="form-control" type="number" min="1" step="0.1" ng-model="drProduto.pro_valorvenda" id="pro_valorvenda">
                 </div>
                 <div class="form-group">
                     <label>Coleção</label>
-                    <select class="form-control" ng-model="drProduto.drColecao" ng-options="drColecao.col_descricao for drColecao in drColecaoLst" />
+                    <select class="form-control" ng-valu="" ng-model="drProduto.drColecao" ng-options="drColecao.col_descricao for drColecao in drColecaoLst track by drColecao.col_codigo"></select>
                 </div>
                 <input type="button" value="Salvar" ng-click="save(drProduto);" onclick="this.disabled = true;" class="btn btn-primary">
                 <input type="button" value="Cancelar" ng-click="requestPage('lst/drProdutoLst');" class="btn btn-default">

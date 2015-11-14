@@ -226,3 +226,11 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+.btn-add{
+    border-radius: 50%; 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 999999999;
+}
