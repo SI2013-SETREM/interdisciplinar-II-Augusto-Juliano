@@ -1,6 +1,13 @@
-<a href="#" class="btn btn-danger btn-lg btn-add" ng-click="requestPage('frm/drPessoasFrm', 'pessoas')" >+</a>
+<a href="#" class="btn btn-primary btn-lg btn-add" ng-click="requestPage('frm/drPessoasFrm', 'pessoas')" >+</a>
 
 <div ng-controller="drPessoasController">
+    <div ng-show="http.pendingRequests.length > 0" class="showbox">  
+        <div class="loader">    
+            <svg class="circular" viewBox="25 25 50 50">      
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"/>    
+            </svg>  
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
@@ -13,18 +20,18 @@
             </ol>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <form>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                        <input type="text" class="form-control" placeholder="Pesquise pelo Nome" ng-model="search">
-                    </div>      
-                </div>
-            </form>
+    <div class="row form-horizontal">
+        <div class="col-lg-11 no-margin">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Pesquise pelo Nome" ng-model="search">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>
+        </div>
+        <div class="col-lg-1 text-right">
+            <div class="btn btn-primary" ng-click="loadDrPessoasLst()"><i class="fa fa-refresh"></i></div>
         </div>
     </div>
+    <p></p>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
@@ -92,6 +99,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr ng-show="drPessoasLst.length === 0 && http.pendingRequests.length == 0">
+                            <td colspan="1000">Nenhum registro encontrado :(</td>
+                        </tr>
                         <tr ng-repeat="drPessoas in drPessoasLst| orderBy:sortType:sortReverse | filter:search">
                             <td>{{drPessoas.pes_nome}}</td>
                             <td>{{drPessoas.pes_cpf}}</td>

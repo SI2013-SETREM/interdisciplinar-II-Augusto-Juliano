@@ -16,50 +16,51 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <form role="form">
+            <form role="form"  name="form" ng-submit="save(drPessoas);">
                 <input class="form-control hidden" ng-model="drPessoas.pes_codigo" id="pes_codigo">
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Nome Completo</label>
-                    <input class="form-control" type='text' ng-model="drPessoas.pes_nome" id="pes_nome">
+                    <input class="form-control text-capitalize" type="text" ng-model="drPessoas.pes_nome" id="pes_nome" required maxlength="100">
                 </div>
-                <div class="form-group">
+                <div class="form-group required">
                     <label>CPF</label>
-                    <input class="form-control" type='number' ng-model="drPessoas.pes_cpf" id="pes_cpf">
+                    <input class="form-control" type="text" ng-model="drPessoas.pes_cpf" id="pes_cpf" maxlength="11" oninput="this.setCustomValidity(validateCPF(this.value) ? '' : 'CPF inválido')" required pattern="[0-9]{11}" title="O CPF deve ter no mínimo 11 números e ser válido">
                 </div>
                 <div class="form-group">
                     <label>RG</label>
-                    <input class="form-control" type='text' ng-model="drPessoas.pes_rg" id="pes_rg">
+                    <input class="form-control" type="text" ng-model="drPessoas.pes_rg" id="pes_rg" maxlength="20">
                 </div>
                 <div class="form-group">
                     <label>E-mail</label>
-                    <input class="form-control" type='text' ng-model="drPessoas.pes_email" id="pes_email">
+                    <input class="form-control" type="email" ng-model="drPessoas.pes_email" id="pes_email" maxlenght="100">
                 </div>
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Login</label>
-                    <input class="form-control" type='text' ng-model="drPessoas.pes_login" id="pes_login">
+                    <input class="form-control" type="text" ng-model="drPessoas.pes_login" id="pes_login" required maxlength="50">
                 </div>
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Password</label>
-                    <input class="form-control" type='password' ng-model="drPessoas.pes_password" id="pes_password">
+                    <input class="form-control" type="password" ng-model="drPessoas.pes_password" id="pes_password" required maxlength="32" minlength="6">
                 </div>
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Ativo?</label>
-                    <input type="checkbox" style="margin-left: 6px; margin-top: 15px;" ng-model="drPessoas.pes_status" id="pes_status" />
+                    <input type="checkbox" ng-model="drPessoas.pes_status" id="pes_status" checked  ="true"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Setor</label>
-                    <select class="form-control" ng-model="drPessoas.drSetor" ng-options="drSetor.set_descricao for drSetor in drSetorLst track by drSetor.set_codigo"></select>
-                </div>
-                <div class="form-group">
-                    <label>Nível de Acesso</label>
-                    <select class="form-control" ng-model="drPessoas.pes_nivelacesso">
-                        <option value='3'>Chefe de Produção</option>
-                        <option value='1'>Gerente de Produção</option>
-                        <option value='2'>Gerente de Setor</option>
+                    <select class="form-control" ng-model="drPessoas.drSetor" ng-options="drSetor.set_descricao for drSetor in drSetorLst track by drSetor.set_codigo" required>
                     </select>
                 </div>
-                <input type="button" value="Salvar" ng-click="save(drPessoas);" onclick="this.disabled = true;" class="btn btn-primary">
-                <input type="button" value="Cancelar" ng-click="requestPage('lst/drPessoasLst');" class="btn btn-default">
+                <div class="form-group required">
+                    <label>Nível de Acesso</label>
+                    <select class="form-control" ng-model="drPessoas.pes_nivelacesso" convert-to-number>
+                        <option value="3">Chefe de Produção</option>
+                        <option value="1">Gerente de Produção</option>
+                        <option value="2">Gerente de Setor</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-default" ng-click="requestPage('lst/drPessoasLst');">Cancelar</button>
             </form>
         </div>
     </div>

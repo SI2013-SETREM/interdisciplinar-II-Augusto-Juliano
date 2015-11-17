@@ -16,16 +16,20 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <form role="form">
+            <form role="form" name="form" ng-submit="save(drColecao);">
                 <input class="form-control hidden" value="0" ng-model="drColecao.col_codigo" id="col_codigo">
-                <div class="form-group">
+                <div class="form-group required">
                     <label>Descrição</label>
-                    <input class="form-control" ng-model="drColecao.col_descricao" id="col_descricao">
+                    <input class="form-control" ng-model="drColecao.col_descricao" id="col_descricao" required maxlength="100">
+
+                </div>
+                <div class="form-group required">
+                    <label>Status</label>
                     <input type="checkbox" style="float: left;" ng-model="drColecao.col_status" id="col_status" />
                 </div>
 
-                <input type="button" value="Salvar" ng-click="save(drColecao);" onclick="this.disabled = true;" class="btn btn-primary">
-                <input type="button" value="Cancelar" ng-click="requestPage('lst/drColecaoLst');" class="btn btn-default">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-default" ng-click="requestPage('lst/drColecaoLst');">Cancelar</button>
             </form>
         </div>
     </div>

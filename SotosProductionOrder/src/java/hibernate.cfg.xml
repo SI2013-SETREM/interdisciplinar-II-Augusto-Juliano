@@ -9,6 +9,7 @@
     <property name="hibernate.connection.password">Ric109au</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="br.com.sotos.model.DrColecao"/>
     <mapping class="br.com.sotos.model.DrCor"/>
     <mapping class="br.com.sotos.model.DrEtapaProducao"/>

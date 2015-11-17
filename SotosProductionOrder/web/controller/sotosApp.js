@@ -11,6 +11,18 @@ app.controller("sotosController", function ($scope, $compile) {
             $compile($("#content-page"))($scope);
         });
     };
+}).directive('convertToNumber', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModel) {
+            ngModel.$parsers.push(function (val) {
+                return parseInt(val, 10);
+            });
+            ngModel.$formatters.push(function (val) {
+                return '' + val;
+            });
+        }
+    };
 });
 
 app.controller("drCorController", function ($scope, $http) {
@@ -19,6 +31,7 @@ app.controller("drCorController", function ($scope, $http) {
     $scope.sortReverse = false;
     $scope.search = "";
     $scope.drCor = $scope.$parent.model;
+    $scope.http = $http;
 
     $scope.loadDrCorLst = function () {
         $http.get("ws/DrCorController/findAll", {method: "GET"}).then(function (response) {
@@ -89,6 +102,7 @@ app.controller("drTamanhoController", function ($scope, $http) {
     $scope.sortReverse = false;
     $scope.search = "";
     $scope.drTamanho = $scope.$parent.model;
+    $scope.http = $http;
 
     $scope.loadDrTamanhoLst = function () {
         $http.get("ws/DrTamanhoController/findAll", {method: "GET"}).then(function (response) {
@@ -159,6 +173,7 @@ app.controller("drColecaoController", function ($scope, $http) {
     $scope.sortReverse = false;
     $scope.search = "";
     $scope.drColecao = $scope.$parent.model;
+    $scope.http = $http;
 
     $scope.loadDrColecaoLst = function () {
         $http.get("ws/DrColecaoController/findAll", {method: "GET"}).then(function (response) {
@@ -229,6 +244,7 @@ app.controller("drSetorController", function ($scope, $http) {
     $scope.sortReverse = false;
     $scope.search = "";
     $scope.drSetor = $scope.$parent.model;
+    $scope.http = $http;
 
     $scope.loadDrSetorLst = function () {
         $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function (response) {
@@ -301,6 +317,7 @@ app.controller("drProdutoController", function ($scope, $http) {
     $scope.sortReverse = false;
     $scope.search = "";
     $scope.drProduto = $scope.$parent.model;
+    $scope.http = $http;
 
     $scope.loadDrProdutoLst = function () {
         $http.get("ws/DrProdutoController/findAll", {method: "GET"}).then(function (response) {
@@ -379,6 +396,11 @@ app.controller("drPessoasController", function ($scope, $http) {
     $scope.sortReverse = false;
     $scope.search = "";
     $scope.drPessoas = $scope.$parent.model;
+    $scope.http = $http;
+
+    if (!$scope.drPessoas.pes_codigo) {
+        $scope.drPessoas.pes_nivelacesso = "3";
+    }
 
     $scope.loadDrPessoasLst = function () {
         $http.get("ws/DrPessoasController/findAll", {method: "GET"}).then(function (response) {
@@ -389,6 +411,8 @@ app.controller("drPessoasController", function ($scope, $http) {
     $scope.loadDrSetorLst = function () {
         $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function (response) {
             $scope.drSetorLst = response.data;
+            if (!$scope.drPessoas.pes_codigo)
+                $scope.drPessoas.drSetor = $scope.drSetorLst[0];
         });
     };
 
