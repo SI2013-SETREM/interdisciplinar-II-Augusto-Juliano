@@ -21,6 +21,14 @@ public class DAO<T> {
 
     private Session session;
 
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
     public void insert(T entity) {
         session = HibernateUtil.getSessionFactory().openSession();
         Transaction t = session.beginTransaction();

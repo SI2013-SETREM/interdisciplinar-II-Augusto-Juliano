@@ -67,4 +67,13 @@ public class DrProdutoCoresController {
 
         return gson.toJson(lstDrProdutoCores);
     }
+    
+    @GET
+    @Path("findByProCodigo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String findByProCodigo(@QueryParam("pro_codigo") int pro_codigo) {
+        List<DrProdutoCores> lstDrProdutoCores = dao.findByProCodigo(pro_codigo);
+
+        return gson.toJson(lstDrProdutoCores);
+    }
 }
