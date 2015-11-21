@@ -456,6 +456,74 @@ app.controller("drProdutoCoresController", function($scope, $http) {
     $scope.loadDrCorLst();
 });
 
+app.controller("drEtapasProdutoController", function($scope, $http) {
+    $scope.drEtapasProdutoLst = [];
+    $scope.drSetorLst = [];
+    $scope.sortType = "cor_descricao";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drProduto = $scope.$parent.model;
+    $scope.http = $http;
+
+    $scope.loadDrEtapasProdutoLst = function() {
+        $http.get("ws/DrEtapasProdutoController/findByProCodigo", {method: "GET", params: {pro_codigo: $scope.drProduto.pro_codigo}}).then(function(response) {
+            $scope.drEtapasProdutoLst = response.data;
+        });
+    };
+
+    $scope.loadDrSetorLst = function() {
+        $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function(response) {
+            $scope.drSetorLst = response.data;
+        });
+    };
+
+    $scope.resetForm = function() {
+        $scope.drEtapasProduto = {};
+    };
+
+    $scope.delete = function(drEtapasProduto) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrEtapasProdutoController/delete",
+                    params: {
+                        json: drEtapasProduto
+                    }
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
+                        $scope.loadDrEtapasProdutoLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function(drEtapasProduto) {
+        $scope.insert(drEtapasProduto);
+    };
+
+    $scope.insert = function(drEtapasProduto) {
+        drEtapasProduto.drProduto = $scope.drProduto;
+        $http({
+            method: "GET",
+            url: "ws/DrEtapasProdutoController/insert",
+            params: {
+                json: drEtapasProduto
+            }
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
+                $scope.resetForm();
+                $scope.loadDrEtapasProdutoLst();
+            });
+        });
+    };
+
+    $scope.loadDrEtapasProdutoLst();
+    $scope.loadDrSetorLst();
+});
+
+
 app.controller("drProdutoTamanhosController", function($scope, $http) {
     $scope.drProdutoTamanhosLst = [];
     $scope.drTamanhoLst = [];
