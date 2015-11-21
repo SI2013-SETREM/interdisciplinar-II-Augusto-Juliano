@@ -456,6 +456,73 @@ app.controller("drProdutoCoresController", function($scope, $http) {
     $scope.loadDrCorLst();
 });
 
+app.controller("drProdutoTamanhosController", function($scope, $http) {
+    $scope.drProdutoTamanhosLst = [];
+    $scope.drTamanhoLst = [];
+    $scope.sortType = "tam_sigla";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drProduto = $scope.$parent.model;
+    $scope.http = $http;
+
+    $scope.loadDrProdutoTamanhoLst = function() {
+        $http.get("ws/DrProdutoTamanhoController/findByProCodigo", {method: "GET", params: {pro_codigo: $scope.drProduto.pro_codigo}}).then(function(response) {
+            $scope.drProdutoTamanhosLst = response.data;
+        });
+    };
+
+    $scope.loadDrTamanhoLst = function() {
+        $http.get("ws/DrTamanhoController/findAll", {method: "GET"}).then(function(response) {
+            $scope.drTamanhoLst = response.data;
+        });
+    };
+
+    $scope.resetForm = function() {
+        $scope.drProdutoTamanhos = {};
+    };
+
+    $scope.delete = function(drProdutoTamanhos) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrProdutoTamanhoController/delete",
+                    params: {
+                        json: drProdutoTamanhos
+                    }
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
+                        $scope.loadDrProdutoTamanhoLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function(drProdutoTamanhos) {
+        $scope.insert(drProdutoTamanhos);
+    };
+
+    $scope.insert = function(drProdutoTamanhos) {
+        drProdutoTamanhos.drProduto = $scope.drProduto;
+        $http({
+            method: "GET",
+            url: "ws/DrProdutoTamanhoController/insert",
+            params: {
+                json: drProdutoTamanhos
+            }
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
+                $scope.resetForm();
+                $scope.loadDrProdutoTamanhoLst();
+            });
+        });
+    };
+
+    $scope.loadDrProdutoTamanhoLst();
+    $scope.loadDrTamanhoLst();
+});
+
 app.controller("drPessoasController", function($scope, $http) {
     $scope.drPessoasLst = [];
     $scope.drSetorLst = [];

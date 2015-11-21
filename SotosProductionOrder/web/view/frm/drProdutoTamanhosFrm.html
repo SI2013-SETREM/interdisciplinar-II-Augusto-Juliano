@@ -1,0 +1,88 @@
+<div ng-controller="drProdutoTamanhosController">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Produto
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="index.html">Início</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Produto
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <form role="form" ng-submit="save(drProdutoTamanhos);">
+                <input class="form-control hidden" ng-model="drProdutoTamanhos.prt_codigo" id="prt_codigo">
+                <div class="form-group">
+                    <label>Produto</label>
+                    <input type="text" class="form-control" ng-model="drProduto.pro_codigopro + ' - ' + drProduto.pro_descricao" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Tamanho</label>
+                    <select class="form-control" name="drCor" ng-model="drProdutoTamanhos.drTamanho" ng-options="drTamanho.tam_sigla for drTamanho in drTamanhoLst track by drTamanho.tam_codigo">
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" ng-click="requestPage('lst/drProdutoLst');" class="btn btn-default">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pro_codigo';
+                                            sortReverse = !sortReverse">
+                                    Referência
+                                    <span ng-show="sortType === 'pro_codigo' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pro_codigo' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'cor_descricao';
+                                            sortReverse = !sortReverse">
+                                    Sigla
+                                    <span ng-show="sortType === 'cor_descricao' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'cor_descricao' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'cor_descricao';
+                                            sortReverse = !sortReverse">
+                                    Descrição
+                                    <span ng-show="sortType === 'cor_descricao' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'cor_descricao' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th class="col-button-header">Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="drProdutoTamanhos.length === 0 && http.pendingRequests.length == 0">
+                            <td colspan="1000">Nenhum registro encontrado :(</td>
+                        </tr>
+                        <tr ng-repeat="drProdutoTamanhos in drProdutoTamanhosLst| orderBy:sortType:sortReverse | filter:search">
+                            <td>{{drProdutoTamanhos.drProduto.pro_codigopro}}</td>
+                            <td>{{drProdutoTamanhos.drTamanho.tam_sigla}}</td>
+                            <td>{{drProdutoTamanhos.drTamanho.tam_descricao}}</td>
+                            <td class="text-center">
+                                <a href="#" ng-click="delete(drProdutoTamanhos);">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
