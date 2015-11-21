@@ -70,6 +70,9 @@
                                     <span ng-show="sortType === 'col_codigo' && sortReverse" class="fa fa-caret-up"></span>
                                 </a>
                             </th>
+                            <th class="col-button-header">Cores</th>
+                            <th class="col-button-header">Tamanhos</th>
+                            <th class="col-button-header">S. O.</th>
                             <th class="col-button-header">Editar</th>
                             <th class="col-button-header">Excluir</th>
                         </tr>
@@ -83,6 +86,20 @@
                             <td>{{drProduto.pro_descricao}}</td>
                             <td>{{drProduto.pro_valorvenda| currency:"R$ "}}</td>
                             <td>{{drProduto.drColecao.col_descricao}}</td>
+                            <td class="text-center">
+                                <a href="#"  ng-click="requestPage('frm/drProdutoCoresFrm', 'produtos', drProduto);">
+                                    <i class="fa fa-bookmark-o"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="#"  ng-click="requestPage('frm/drProdutoTamanhosFrm', 'produtos', drProduto);">
+                                    <i class="fa fa-text-height"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="#"  ng-click="requestPage('frm/drSequenciaOperacionalFrm', 'produtos', drProduto);">
+                                    <i class="fa fa-sitemap"></i>
+                                </a>
                             <td class="text-center">
                                 <a href="#"  ng-click="requestPage('frm/drProdutoFrm', 'produtos', drProduto);">
                                     <i class="fa fa-pencil"></i>

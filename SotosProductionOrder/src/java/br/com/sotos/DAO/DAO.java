@@ -22,11 +22,7 @@ public class DAO<T> {
     private Session session;
 
     public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
+        return HibernateUtil.getSessionFactory().openSession();
     }
 
     public void insert(T entity) {

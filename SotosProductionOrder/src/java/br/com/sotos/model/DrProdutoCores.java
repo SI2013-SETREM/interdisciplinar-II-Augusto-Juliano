@@ -27,6 +27,10 @@ public class DrProdutoCores implements Serializable {
     @JoinColumn(name = "cor_codigo", referencedColumnName = "cor_codigo")
     private DrCor drCor;
 
+    @ManyToOne
+    @JoinColumn(name = "pro_codigo", referencedColumnName = "pro_codigo")
+    private DrProduto drProduto;
+
     private short prc_ordem;
 
     public int getPrc_codigo() {
@@ -53,4 +57,11 @@ public class DrProdutoCores implements Serializable {
         this.prc_ordem = prc_ordem;
     }
 
+    public DrProduto getDrProduto() {
+        return drProduto;
+    }
+
+    public void setDrProduto(DrProduto drProduto) {
+        this.drProduto = drProduto;
+    }
 }

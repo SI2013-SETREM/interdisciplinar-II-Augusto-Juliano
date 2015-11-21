@@ -1,7 +1,7 @@
 var app = angular.module('sotosApp', []);
-app.controller("sotosController", function ($scope, $compile) {
-    $scope.requestPage = function (page, activeTab, model) {
-        $("#content-page").load("view/" + page + ".html", function () {
+app.controller("sotosController", function($scope, $compile) {
+    $scope.requestPage = function(page, activeTab, model) {
+        $("#content-page").load("view/" + page + ".html", function() {
             if (model) {
                 $scope.model = model;
             } else {
@@ -11,21 +11,21 @@ app.controller("sotosController", function ($scope, $compile) {
             $compile($("#content-page"))($scope);
         });
     };
-}).directive('convertToNumber', function () {
+}).directive('convertToNumber', function() {
     return {
         require: 'ngModel',
-        link: function (scope, element, attrs, ngModel) {
-            ngModel.$parsers.push(function (val) {
+        link: function(scope, element, attrs, ngModel) {
+            ngModel.$parsers.push(function(val) {
                 return parseInt(val, 10);
             });
-            ngModel.$formatters.push(function (val) {
+            ngModel.$formatters.push(function(val) {
                 return '' + val;
             });
         }
     };
 });
 
-app.controller("drCorController", function ($scope, $http) {
+app.controller("drCorController", function($scope, $http) {
     $scope.drCorLst = [];
     $scope.sortType = "cor_descricao";
     $scope.sortReverse = false;
@@ -33,14 +33,14 @@ app.controller("drCorController", function ($scope, $http) {
     $scope.drCor = $scope.$parent.model;
     $scope.http = $http;
 
-    $scope.loadDrCorLst = function () {
-        $http.get("ws/DrCorController/findAll", {method: "GET"}).then(function (response) {
+    $scope.loadDrCorLst = function() {
+        $http.get("ws/DrCorController/findAll", {method: "GET"}).then(function(response) {
             $scope.drCorLst = response.data;
         });
     };
 
-    $scope.delete = function (drCor) {
-        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+    $scope.delete = function(drCor) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
             if (ok) {
                 $http({
                     method: "GET",
@@ -48,8 +48,8 @@ app.controller("drCorController", function ($scope, $http) {
                     params: {
                         json: drCor
                     }
-                }).then(function (response) {
-                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
                         $scope.loadDrCorLst();
                     });
                 });
@@ -57,7 +57,7 @@ app.controller("drCorController", function ($scope, $http) {
         });
     };
 
-    $scope.save = function (drCor) {
+    $scope.save = function(drCor) {
         if (drCor.cor_codigo === undefined) {
             $scope.insert(drCor);
         } else {
@@ -65,29 +65,29 @@ app.controller("drCorController", function ($scope, $http) {
         }
     };
 
-    $scope.insert = function (drCor) {
+    $scope.insert = function(drCor) {
         $http({
             method: "GET",
             url: "ws/DrCorController/insert",
             params: {
                 json: drCor
             }
-        }).then(function (response) {
-            bootbox.alert("Registro inserido com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
                 $scope.requestPage('lst/drCorLst');
             });
         });
     };
 
-    $scope.update = function (drCor) {
+    $scope.update = function(drCor) {
         $http({
             method: "GET",
             url: "ws/DrCorController/update",
             params: {
                 json: drCor
             }
-        }).then(function (response) {
-            bootbox.alert("Registro alterado com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro alterado com Sucesso!", function() {
                 $scope.requestPage('lst/drCorLst');
             });
         });
@@ -96,7 +96,7 @@ app.controller("drCorController", function ($scope, $http) {
     $scope.loadDrCorLst();
 });
 
-app.controller("drTamanhoController", function ($scope, $http) {
+app.controller("drTamanhoController", function($scope, $http) {
     $scope.drTamanhoLst = [];
     $scope.sortType = "tam_ordem";
     $scope.sortReverse = false;
@@ -104,14 +104,14 @@ app.controller("drTamanhoController", function ($scope, $http) {
     $scope.drTamanho = $scope.$parent.model;
     $scope.http = $http;
 
-    $scope.loadDrTamanhoLst = function () {
-        $http.get("ws/DrTamanhoController/findAll", {method: "GET"}).then(function (response) {
+    $scope.loadDrTamanhoLst = function() {
+        $http.get("ws/DrTamanhoController/findAll", {method: "GET"}).then(function(response) {
             $scope.drTamanhoLst = response.data;
         });
     };
 
-    $scope.delete = function (drTamanho) {
-        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+    $scope.delete = function(drTamanho) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
             if (ok) {
                 $http({
                     method: "GET",
@@ -119,8 +119,8 @@ app.controller("drTamanhoController", function ($scope, $http) {
                     params: {
                         json: drTamanho
                     }
-                }).then(function (response) {
-                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
                         $scope.loadDrTamanhoLst();
                     });
                 });
@@ -128,7 +128,7 @@ app.controller("drTamanhoController", function ($scope, $http) {
         });
     };
 
-    $scope.save = function (drTamanho) {
+    $scope.save = function(drTamanho) {
         if (drTamanho.tam_codigo === undefined) {
             $scope.insert(drTamanho);
         } else {
@@ -136,29 +136,29 @@ app.controller("drTamanhoController", function ($scope, $http) {
         }
     };
 
-    $scope.insert = function (drTamanho) {
+    $scope.insert = function(drTamanho) {
         $http({
             method: "GET",
             url: "ws/DrTamanhoController/insert",
             params: {
                 json: drTamanho
             }
-        }).then(function (response) {
-            bootbox.alert("Registro inserido com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
                 $scope.requestPage('lst/drTamanhoLst');
             });
         });
     };
 
-    $scope.update = function (drTamanho) {
+    $scope.update = function(drTamanho) {
         $http({
             method: "GET",
             url: "ws/DrTamanhoController/update",
             params: {
                 json: drTamanho
             }
-        }).then(function (response) {
-            bootbox.alert("Registro alterado com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro alterado com Sucesso!", function() {
                 $scope.requestPage('lst/drTamanhoLst');
             });
         });
@@ -167,7 +167,7 @@ app.controller("drTamanhoController", function ($scope, $http) {
     $scope.loadDrTamanhoLst();
 });
 
-app.controller("drColecaoController", function ($scope, $http) {
+app.controller("drColecaoController", function($scope, $http) {
     $scope.drColecaoLst = [];
     $scope.sortType = "col_descricao";
     $scope.sortReverse = false;
@@ -175,14 +175,14 @@ app.controller("drColecaoController", function ($scope, $http) {
     $scope.drColecao = $scope.$parent.model;
     $scope.http = $http;
 
-    $scope.loadDrColecaoLst = function () {
-        $http.get("ws/DrColecaoController/findAll", {method: "GET"}).then(function (response) {
+    $scope.loadDrColecaoLst = function() {
+        $http.get("ws/DrColecaoController/findAll", {method: "GET"}).then(function(response) {
             $scope.drColecaoLst = response.data;
         });
     };
 
-    $scope.delete = function (drColecao) {
-        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+    $scope.delete = function(drColecao) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
             if (ok) {
                 $http({
                     method: "GET",
@@ -190,8 +190,8 @@ app.controller("drColecaoController", function ($scope, $http) {
                     params: {
                         json: drColecao
                     }
-                }).then(function (response) {
-                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
                         $scope.loadDrColecaoLst();
                     });
                 });
@@ -199,7 +199,7 @@ app.controller("drColecaoController", function ($scope, $http) {
         });
     };
 
-    $scope.save = function (drColecao) {
+    $scope.save = function(drColecao) {
         if (drColecao.col_codigo === undefined) {
             $scope.insert(drColecao);
         } else {
@@ -207,29 +207,29 @@ app.controller("drColecaoController", function ($scope, $http) {
         }
     };
 
-    $scope.insert = function (drColecao) {
+    $scope.insert = function(drColecao) {
         $http({
             method: "GET",
             url: "ws/DrColecaoController/insert",
             params: {
                 json: drColecao
             }
-        }).then(function (response) {
-            bootbox.alert("Registro inserido com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
                 $scope.requestPage('lst/drColecaoLst');
             });
         });
     };
 
-    $scope.update = function (drColecao) {
+    $scope.update = function(drColecao) {
         $http({
             method: "GET",
             url: "ws/DrColecaoController/update",
             params: {
                 json: drColecao
             }
-        }).then(function (response) {
-            bootbox.alert("Registro alterado com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro alterado com Sucesso!", function() {
                 $scope.requestPage('lst/drColecaoLst');
             });
         });
@@ -238,7 +238,7 @@ app.controller("drColecaoController", function ($scope, $http) {
     $scope.loadDrColecaoLst();
 });
 
-app.controller("drSetorController", function ($scope, $http) {
+app.controller("drSetorController", function($scope, $http) {
     $scope.drSetorLst = [];
     $scope.sortType = "set_descricao";
     $scope.sortReverse = false;
@@ -246,14 +246,14 @@ app.controller("drSetorController", function ($scope, $http) {
     $scope.drSetor = $scope.$parent.model;
     $scope.http = $http;
 
-    $scope.loadDrSetorLst = function () {
-        $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function (response) {
+    $scope.loadDrSetorLst = function() {
+        $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function(response) {
             $scope.drSetorLst = response.data;
         });
     };
 
-    $scope.delete = function (drSetor) {
-        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+    $scope.delete = function(drSetor) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
             if (ok) {
                 $http({
                     method: "GET",
@@ -261,8 +261,8 @@ app.controller("drSetorController", function ($scope, $http) {
                     params: {
                         json: drSetor
                     }
-                }).then(function (response) {
-                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
                         $scope.loadDrSetorLst();
                     });
                 });
@@ -270,7 +270,7 @@ app.controller("drSetorController", function ($scope, $http) {
         });
     };
 
-    $scope.save = function (drSetor) {
+    $scope.save = function(drSetor) {
         if (drSetor.set_codigo === undefined) {
             $scope.insert(drSetor);
         } else {
@@ -278,29 +278,29 @@ app.controller("drSetorController", function ($scope, $http) {
         }
     };
 
-    $scope.insert = function (drSetor) {
+    $scope.insert = function(drSetor) {
         $http({
             method: "GET",
             url: "ws/DrSetorController/insert",
             params: {
                 json: drSetor
             }
-        }).then(function (response) {
-            bootbox.alert("Registro inserido com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
                 $scope.requestPage('lst/drSetorLst');
             });
         });
     };
 
-    $scope.update = function (drSetor) {
+    $scope.update = function(drSetor) {
         $http({
             method: "GET",
             url: "ws/DrSetorController/update",
             params: {
                 json: drSetor
             }
-        }).then(function (response) {
-            bootbox.alert("Registro alterado com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro alterado com Sucesso!", function() {
                 $scope.requestPage('lst/drSetorLst');
             });
         });
@@ -310,7 +310,7 @@ app.controller("drSetorController", function ($scope, $http) {
 });
 
 
-app.controller("drProdutoController", function ($scope, $http) {
+app.controller("drProdutoController", function($scope, $http) {
     $scope.drProdutoLst = [];
     $scope.drColecaoLst = [];
     $scope.sortType = "pro_codigo";
@@ -319,20 +319,20 @@ app.controller("drProdutoController", function ($scope, $http) {
     $scope.drProduto = $scope.$parent.model;
     $scope.http = $http;
 
-    $scope.loadDrProdutoLst = function () {
-        $http.get("ws/DrProdutoController/findAll", {method: "GET"}).then(function (response) {
+    $scope.loadDrProdutoLst = function() {
+        $http.get("ws/DrProdutoController/findAll", {method: "GET"}).then(function(response) {
             $scope.drProdutoLst = response.data;
         });
     };
 
-    $scope.loadDrColecaoLst = function () {
-        $http.get("ws/DrColecaoController/findAll", {method: "GET"}).then(function (response) {
+    $scope.loadDrColecaoLst = function() {
+        $http.get("ws/DrColecaoController/findAll", {method: "GET"}).then(function(response) {
             $scope.drColecaoLst = response.data;
         });
     };
 
-    $scope.delete = function (drProduto) {
-        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+    $scope.delete = function(drProduto) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
             if (ok) {
                 $http({
                     method: "GET",
@@ -340,8 +340,8 @@ app.controller("drProdutoController", function ($scope, $http) {
                     params: {
                         json: drProduto
                     }
-                }).then(function (response) {
-                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
                         $scope.loadDrProdutoLst();
                     });
                 });
@@ -349,7 +349,7 @@ app.controller("drProdutoController", function ($scope, $http) {
         });
     };
 
-    $scope.save = function (drProduto) {
+    $scope.save = function(drProduto) {
         if (drProduto.pro_codigo === undefined) {
             $scope.insert(drProduto);
         } else {
@@ -357,29 +357,29 @@ app.controller("drProdutoController", function ($scope, $http) {
         }
     };
 
-    $scope.insert = function (drProduto) {
+    $scope.insert = function(drProduto) {
         $http({
             method: "GET",
             url: "ws/DrProdutoController/insert",
             params: {
                 json: drProduto
             }
-        }).then(function (response) {
-            bootbox.alert("Registro inserido com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
                 $scope.requestPage('lst/drProdutoLst');
             });
         });
     };
 
-    $scope.update = function (drProduto) {
+    $scope.update = function(drProduto) {
         $http({
             method: "GET",
             url: "ws/DrProdutoController/update",
             params: {
                 json: drProduto
             }
-        }).then(function (response) {
-            bootbox.alert("Registro alterado com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro alterado com Sucesso!", function() {
                 $scope.requestPage('lst/drProdutoLst');
             });
         });
@@ -389,7 +389,74 @@ app.controller("drProdutoController", function ($scope, $http) {
     $scope.loadDrColecaoLst();
 });
 
-app.controller("drPessoasController", function ($scope, $http) {
+app.controller("drProdutoCoresController", function($scope, $http) {
+    $scope.drProdutoCoresLst = [];
+    $scope.drCorLst = [];
+    $scope.sortType = "cor_descricao";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drProduto = $scope.$parent.model;
+    $scope.http = $http;
+
+    $scope.loadDrProdutoCoresLst = function() {
+        $http.get("ws/DrProdutoCoresController/findByProCodigo", {method: "GET", params: {pro_codigo: $scope.drProduto.pro_codigo}}).then(function(response) {
+            $scope.drProdutoCoresLst = response.data;
+        });
+    };
+
+    $scope.loadDrCorLst = function() {
+        $http.get("ws/DrCorController/findAll", {method: "GET"}).then(function(response) {
+            $scope.drCorLst = response.data;
+        });
+    };
+
+    $scope.resetForm = function() {
+        $scope.drProdutoCores = {};
+    };
+
+    $scope.delete = function(drProdutoCores) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrProdutoCoresController/delete",
+                    params: {
+                        json: drProdutoCores
+                    }
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
+                        $scope.loadDrProdutoCoresLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function(drProdutoCores) {
+        $scope.insert(drProdutoCores);
+    };
+
+    $scope.insert = function(drProdutoCores) {
+        drProdutoCores.drProduto = $scope.drProduto;
+        $http({
+            method: "GET",
+            url: "ws/DrProdutoCoresController/insert",
+            params: {
+                json: drProdutoCores
+            }
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
+                $scope.resetForm();
+                $scope.loadDrProdutoCoresLst();
+            });
+        });
+    };
+
+    $scope.loadDrProdutoCoresLst();
+    $scope.loadDrCorLst();
+});
+
+app.controller("drPessoasController", function($scope, $http) {
     $scope.drPessoasLst = [];
     $scope.drSetorLst = [];
     $scope.sortType = "pes_nome";
@@ -402,22 +469,22 @@ app.controller("drPessoasController", function ($scope, $http) {
         $scope.drPessoas.pes_nivelacesso = "3";
     }
 
-    $scope.loadDrPessoasLst = function () {
-        $http.get("ws/DrPessoasController/findAll", {method: "GET"}).then(function (response) {
+    $scope.loadDrPessoasLst = function() {
+        $http.get("ws/DrPessoasController/findAll", {method: "GET"}).then(function(response) {
             $scope.drPessoasLst = response.data;
         });
     };
 
-    $scope.loadDrSetorLst = function () {
-        $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function (response) {
+    $scope.loadDrSetorLst = function() {
+        $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function(response) {
             $scope.drSetorLst = response.data;
             if (!$scope.drPessoas.pes_codigo)
                 $scope.drPessoas.drSetor = $scope.drSetorLst[0];
         });
     };
 
-    $scope.delete = function (drPessoas) {
-        bootbox.confirm("Deseja realmente excluir o registro?", function (ok) {
+    $scope.delete = function(drPessoas) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
             if (ok) {
                 $http({
                     method: "GET",
@@ -425,8 +492,8 @@ app.controller("drPessoasController", function ($scope, $http) {
                     params: {
                         json: drPessoas
                     }
-                }).then(function (response) {
-                    bootbox.alert("Registro excluído com Sucesso!", function () {
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
                         $scope.loadDrPessoasLst();
                     });
                 });
@@ -434,7 +501,7 @@ app.controller("drPessoasController", function ($scope, $http) {
         });
     };
 
-    $scope.save = function (drPessoas) {
+    $scope.save = function(drPessoas) {
         if (drPessoas.pes_codigo === undefined) {
             $scope.insert(drPessoas);
         } else {
@@ -442,29 +509,29 @@ app.controller("drPessoasController", function ($scope, $http) {
         }
     };
 
-    $scope.insert = function (drPessoas) {
+    $scope.insert = function(drPessoas) {
         $http({
             method: "GET",
             url: "ws/DrPessoasController/insert",
             params: {
                 json: drPessoas
             }
-        }).then(function (response) {
-            bootbox.alert("Registro inserido com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro inserido com Sucesso!", function() {
                 $scope.requestPage('lst/drPessoasLst');
             });
         });
     };
 
-    $scope.update = function (drPessoas) {
+    $scope.update = function(drPessoas) {
         $http({
             method: "GET",
             url: "ws/DrPessoasController/update",
             params: {
                 json: drPessoas
             }
-        }).then(function (response) {
-            bootbox.alert("Registro alterado com Sucesso!", function () {
+        }).then(function(response) {
+            bootbox.alert("Registro alterado com Sucesso!", function() {
                 $scope.requestPage('lst/drPessoasLst');
             });
         });

@@ -8,7 +8,7 @@ $(function() {
         data: [{
                 period: '2010 Q1',
                 30240: 2666,
-                8258: null,
+                8258: 1332,
                 50233: 2647
             }, {
                 period: '2010 Q2',
@@ -84,7 +84,7 @@ $(function() {
     });
 
     // Line Chart
-    /*
+    
      Morris.Line({
      // ID of the element in which to draw the chart.
      element: 'morris-line-chart',
@@ -195,8 +195,6 @@ $(function() {
      smooth: false,
      resize: true
      });
-     */
-    /*
      // Bar Chart
      Morris.Bar({
      element: 'morris-bar-chart',
@@ -227,6 +225,4 @@ $(function() {
      hideHover: 'auto',
      resize: true
      });
-     */
-
 });
