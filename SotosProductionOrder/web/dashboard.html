@@ -109,10 +109,16 @@
                         <li>
                             <a href="#"><i class="fa fa-fw fa-binoculars"></i> Análise de Produção</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-money"></i> Gestão de Vendas</a>
+                        <li ng-click="requestPage('lst/drOrdemProducaoLst');
+                                    activetab = 'ordens';" ng-class="{
+                                                'active'
+                                                        : activetab === 'ordens'}">
+                            <a href="#"><i class="fa fa-fw fa-area-chart"></i> Gestão de Produção</a>
                         </li>
-                        <li>
+                        <li ng-click="requestPage('lst/drOrdemProducaoFrm');
+                                    activetab = 'ordemproducao';" ng-class="{
+                                                'active'
+                                                        : activetab === 'ordemproducao'}">
                             <a href="#"><i class="fa fa-fw fa-barcode"></i> Ordem de Produção</a>
                         </li>
                         <li>
@@ -429,9 +435,9 @@
         <!-- Utils Javascript -->
         <script src="resources/js/utils.js" type="text/javascript"></script>
         <script type="text/javascript">
-            $(function() {
-                
-            });
+                                        $(function() {
+
+                                        });
         </script>
 
     </body>

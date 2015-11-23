@@ -2,15 +2,20 @@ package br.com.sotos.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.Max;
 
 /**
  *
@@ -37,6 +42,16 @@ public class DrOrdemProducao implements Serializable {
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ord_datacadastro;
+    
+    private String ord_observacao;
+    private Boolean ord_impressa;
+    private String ord_situacao;
+    
+    @OneToMany(mappedBy = "drOrdemProducao", targetEntity = DrEtapaProducao.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<DrEtapaProducao> lstDrEtapaProducao;
+    
+    @OneToMany(mappedBy = "drOrdemProducao", targetEntity = DrOrdemProdutos.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<DrOrdemProdutos> lstDrOrdemProdutos;
 
     public int getOrd_codigo() {
         return ord_codigo;
@@ -78,4 +93,43 @@ public class DrOrdemProducao implements Serializable {
         this.ord_datacadastro = ord_datacadastro;
     }
 
+    public String getOrd_observacao() {
+        return ord_observacao;
+    }
+
+    public void setOrd_observacao(String ord_observacao) {
+        this.ord_observacao = ord_observacao;
+    }
+
+    public Boolean isOrd_impressa() {
+        return ord_impressa;
+    }
+
+    public void setOrd_impressa(Boolean ord_impressa) {
+        this.ord_impressa = ord_impressa;
+    }
+
+    public String getOrd_situacao() {
+        return ord_situacao;
+    }
+
+    public void setOrd_situacao(String ord_situacao) {
+        this.ord_situacao = ord_situacao;
+    }
+    
+    public List<DrEtapaProducao> getLstDrEtapaProducao() {
+        return lstDrEtapaProducao;
+    }
+
+    public void setLstDrEtapaProducao(List<DrEtapaProducao> lstDrEtapaProducao) {
+        this.lstDrEtapaProducao = lstDrEtapaProducao;
+    }
+
+    public List<DrOrdemProdutos> getLstDrOrdemProdutos() {
+        return lstDrOrdemProdutos;
+    }
+
+    public void setLstDrOrdemProdutos(List<DrOrdemProdutos> lstDrOrdemProdutos) {
+        this.lstDrOrdemProdutos = lstDrOrdemProdutos;
+    }
 }

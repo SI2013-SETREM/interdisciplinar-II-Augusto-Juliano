@@ -238,6 +238,42 @@ app.controller("drColecaoController", function($scope, $http) {
     $scope.loadDrColecaoLst();
 });
 
+
+app.controller("drOrdemProducao", function($scope, $http) {
+    $scope.drOrdemProducaoLst = [];     
+    $scope.sortType = "col_descricao";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drOrdemProducao = $scope.$parent.model;
+    $scope.http = $http;
+
+    $scope.loadDrOrdemProducaoLst = function() {
+        $http.get("ws/DrOrdemProducaoController/findAll", {method: "GET"}).then(function(response) {
+            $scope.drOrdemProducaoLst = response.data;
+        });
+    };
+
+    $scope.delete = function(drOrdemProducao) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrOrdemProducaoController/delete",
+                    params: {
+                        json: drOrdemProducao
+                    }
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
+                        $scope.loadDrOrdemProducaoLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.loadDrOrdemProducaoLst();
+});
+
 app.controller("drSetorController", function($scope, $http) {
     $scope.drSetorLst = [];
     $scope.sortType = "set_descricao";
