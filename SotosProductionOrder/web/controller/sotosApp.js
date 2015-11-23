@@ -309,7 +309,6 @@ app.controller("drSetorController", function($scope, $http) {
     $scope.loadDrSetorLst();
 });
 
-
 app.controller("drProdutoController", function($scope, $http) {
     debugger;
     $scope.drProdutoLst = [];
@@ -412,9 +411,9 @@ app.controller("drProdutoFinalController", function($scope, $http) {
     $scope.search = "";
     $scope.drProdutoFinal = $scope.$parent.model;
     $scope.http = $http;
-    
+
     $scope.drProdutoFinal.pro_datacadastro = new Date($scope.drProdutoFinal.pro_datacadastro);
-    
+
     $scope.loadDrProdutoFinalLst = function() {
         $http.get("ws/DrProdutoFinalController/findAll", {method: "GET"}).then(function(response) {
             $scope.drProdutoFinalLst = response.data;

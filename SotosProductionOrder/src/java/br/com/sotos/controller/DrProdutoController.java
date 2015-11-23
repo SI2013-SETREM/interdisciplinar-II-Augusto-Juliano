@@ -2,16 +2,11 @@ package br.com.sotos.controller;
 
 import br.com.sotos.DAO.DrProdutoDAO;
 import br.com.sotos.DAO.DrProdutoFinalDAO;
-import br.com.sotos.model.DrCor;
 import br.com.sotos.model.DrProduto;
 import br.com.sotos.model.DrProdutoCores;
 import br.com.sotos.model.DrProdutoFinal;
 import br.com.sotos.model.DrProdutoTamanho;
 import com.google.gson.Gson;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ws.rs.GET;

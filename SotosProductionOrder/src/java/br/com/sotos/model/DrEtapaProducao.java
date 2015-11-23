@@ -30,15 +30,14 @@ public class DrEtapaProducao implements Serializable {
     private DrOrdemProducao drOrdemProducao;
 
     @ManyToOne
-    @JoinColumn(name = "set_codigo", referencedColumnName = "set_codigo")
-    private DrSetor drSetor;
+    @JoinColumn(name = "etp_codigo", referencedColumnName = "etp_codigo")
+    private DrEtapasProduto drEtapasProduto;
 
     private boolean epp_status;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date epp_datainicio;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date epp_datafim;
-    private int epp_ordem;
 
     public int getEpp_codigo() {
         return epp_codigo;
@@ -56,12 +55,12 @@ public class DrEtapaProducao implements Serializable {
         this.drOrdemProducao = drOrdemProducao;
     }
 
-    public DrSetor getDrSetor() {
-        return drSetor;
+    public DrEtapasProduto getDrEtapasProduto() {
+        return drEtapasProduto;
     }
 
-    public void setDrSetor(DrSetor drSetor) {
-        this.drSetor = drSetor;
+    public void setDrEtapasProduto(DrEtapasProduto drEtapasProduto) {
+        this.drEtapasProduto = drEtapasProduto;
     }
 
     public boolean isEpp_status() {
@@ -87,13 +86,4 @@ public class DrEtapaProducao implements Serializable {
     public void setEpp_datafim(Date epp_datafim) {
         this.epp_datafim = epp_datafim;
     }
-
-    public int getEpp_ordem() {
-        return epp_ordem;
-    }
-
-    public void setEpp_ordem(int epp_ordem) {
-        this.epp_ordem = epp_ordem;
-    }
-
 }

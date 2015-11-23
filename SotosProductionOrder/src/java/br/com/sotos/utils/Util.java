@@ -5,6 +5,7 @@
  */
 package br.com.sotos.utils;
 
+import br.com.sotos.model.DrPessoas;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -24,5 +25,15 @@ public class Util {
             password = String.format("%32x", hash);
         }
         return password;
+    }
+    
+    public static DrPessoas pesLogado;
+
+    public static DrPessoas getPesLogado() {
+        return pesLogado;
+    }
+
+    public static void setPesLogado(DrPessoas pesLogado) {
+        Util.pesLogado = pesLogado;
     }
 }
