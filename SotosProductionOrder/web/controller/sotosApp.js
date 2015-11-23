@@ -332,7 +332,7 @@ app.controller("drProdutoController", function($scope, $http) {
     };
 
     $scope.createChildrens = function() {
-        bootbox.confirm("Deseja realmente iniciar o processo para gerar todos os produtos finais?", function(ok) {
+        bootbox.confirm("<b>Tem certeza que deseja gerar os produtos finais dos produtos cadastrados?</b> <br /><br /> A função de geração dos produtos finais gerará registros apenas para os produtos que tiverem vínculos com: <br /><br /> - Cores; <br /> - Tamanhos; <br /><br /> Certifique-se de que os produtos aos quais você deseja gerar estejam corretamente cadastrados no sistema!", function(ok) {
             if (ok) {
                 $http.get("ws/DrProdutoController/createChildrens", {method: "GET"}).then(function(response) {
                     bootbox.alert("Registros inseridos com Sucesso!", function() {
@@ -399,6 +399,83 @@ app.controller("drProdutoController", function($scope, $http) {
 
     $scope.loadDrProdutoLst();
     $scope.loadDrColecaoLst();
+});
+
+app.controller("drProdutoFinalController", function($scope, $http) {
+    $scope.drProdutoFinalLst = [];
+    $scope.drCorLst = [];
+    $scope.drProdutoLst = [];
+    $scope.drTamanhoLst = [];
+    $scope.sortType = "pro_codigoref";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drProdutoFinal = $scope.$parent.model;
+    $scope.http = $http;
+
+    $scope.loadDrProdutoFinalLst = function() {
+        $http.get("ws/DrProdutoFinalController/findAll", {method: "GET"}).then(function(response) {
+            $scope.drProdutoFinalLst = response.data;
+        });
+    };
+
+    $scope.loadDrCorLst = function() {
+        $http.get("ws/DrCorController/findAll", {method: "GET"}).then(function(response) {
+            $scope.drCorLst = response.data;
+        });
+    };
+
+    $scope.loadDrTamanhoLst = function() {
+        $http.get("ws/DrTamanhoController/findAll", {method: "GET"}).then(function(response) {
+            $scope.drTamanhoLst = response.data;
+        });
+    };
+
+    $scope.loadDrProdutoLst = function() {
+        $http.get("ws/DrProdutoController/findAll", {method: "GET"}).then(function(response) {
+            $scope.drProdutoLst = response.data;
+        });
+    };
+
+    $scope.delete = function(drProdutoFinal) {
+        bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
+            if (ok) {
+                $http({
+                    method: "GET",
+                    url: "ws/DrProdutoFinalController/delete",
+                    params: {
+                        json: drProdutoFinal
+                    }
+                }).then(function(response) {
+                    bootbox.alert("Registro excluído com Sucesso!", function() {
+                        $scope.loadDrProdutoFinalLst();
+                    });
+                });
+            }
+        });
+    };
+
+    $scope.save = function(drProdutoFinal) {
+        $scope.update(drProdutoFinal);
+    };
+
+    $scope.update = function(drProdutoFinal) {
+        $http({
+            method: "GET",
+            url: "ws/DrProdutoFinalController/update",
+            params: {
+                json: drProdutoFinal
+            }
+        }).then(function(response) {
+            bootbox.alert("Registro alterado com Sucesso!", function() {
+                $scope.requestPage('lst/drProdutoFinalLst');
+            });
+        });
+    };
+
+    $scope.loadDrProdutoFinalLst();
+    $scope.loadDrCorLst();
+    $scope.loadDrProdutoLst();
+    $scope.loadDrTamanhoLst();
 });
 
 app.controller("drProdutoCoresController", function($scope, $http) {

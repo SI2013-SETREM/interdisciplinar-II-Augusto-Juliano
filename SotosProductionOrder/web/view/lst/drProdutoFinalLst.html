@@ -1,16 +1,120 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<a href="#" class="btn btn-primary btn-lg btn-add" ng-click="requestPage('frm/drProdutoFinalFrm', 'produtosfinais')">+</a>
+
+<div ng-controller="drProdutoFinalController">
+    <div ng-show="http.pendingRequests.length > 0" class="showbox">  
+        <div class="loader">    
+            <svg class="circular" viewBox="25 25 50 50">      
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"/>    
+            </svg>  
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Produtos Finais
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-bookmark-o"></i> Produtos Finais
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row form-horizontal">
+        <div class="col-lg-11 no-margin">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Pesquise o produto desejado" ng-model="search">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>
+        </div>
+        <div class="col-lg-1 text-right">
+            <div style="margin-left: 0 !important;" class="btn btn-primary" ng-click="loadDrProdutoFinalLst()"><i class="fa fa-refresh"></i></div>
+        </div>
+    </div>
+    <p></p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pro_codigoref';
+                                            sortReverse = !sortReverse">
+                                    Referência
+                                    <span ng-show="sortType === 'pro_codigoref' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pro_codigoref' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pro_descricao';
+                                            sortReverse = !sortReverse">
+                                    Descrição
+                                    <span ng-show="sortType === 'pro_descricao' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pro_descricao' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pro_valorvenda';
+                                            sortReverse = !sortReverse">
+                                    Valor de Venda
+                                    <span ng-show="sortType === 'pro_valorvenda' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pro_valorvenda' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'cor_codigo';
+                                            sortReverse = !sortReverse">
+                                    Cor
+                                    <span ng-show="sortType === 'cor_codigo' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'cor_codigo' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'cor_codigo';
+                                            sortReverse = !sortReverse">
+                                    Tamanho
+                                    <span ng-show="sortType === 'cor_codigo' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'cor_codigo' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'pro_datacadastro';
+                                            sortReverse = !sortReverse">
+                                    Data de Cadastro
+                                    <span ng-show="sortType === 'pro_datacadastro' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'pro_datacadastro' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th class="col-button-header">Editar</th>
+                            <th class="col-button-header">Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="drProdutoFinal.length === 0 && http.pendingRequests.length == 0">
+                            <td colspan="1000">Nenhum registro encontrado :(</td>
+                        </tr>
+                        <tr ng-repeat="drProdutoFinal in drProdutoFinalLst| orderBy:sortType:sortReverse | filter:search">
+                            <td>{{drProdutoFinal.pro_codigoref}}</td>
+                            <td>{{drProdutoFinal.pro_descricao}}</td>
+                            <td>{{drProdutoFinal.pro_valorvenda| currency:"R$ "}}</td>
+                            <td>{{drProdutoFinal.drCor.cor_descricao}}</td>
+                            <td>{{drProdutoFinal.drTamanho.tam_descricao}}</td>
+                            <td>{{drProdutoFinal.pro_datacadastro | date:'yyyy-MM-dd}}</td>
+                            <td class="text-center">
+                                <a href="#"  ng-click="requestPage('frm/drProdutoFinalFrm', 'produtosfinais', drProdutoFinal);">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="#" ng-click="delete(drProdutoFinal);">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

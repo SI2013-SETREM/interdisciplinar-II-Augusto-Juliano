@@ -182,6 +182,12 @@
                                                 : activetab === 'produtos'}">
                                     <a href="#"><i class="fa fa-fw fa-tag"></i> Produtos</a>
                                 </li>
+                                <li ng-click="requestPage('lst/drProdutoFinalLst');
+                                        activetab = 'produtosfinais';" ng-class="{
+                                                'active'
+                                                : activetab === 'produtosfinais'}">
+                                    <a href="#"><i class="fa fa-fw fa-tags"></i> Produtos Finais</a>
+                                </li>
                                 <li ng-click="requestPage('lst/drTamanhoLst');
                                         activetab = 'tamanhos';" ng-class="{
                                                 'active'
