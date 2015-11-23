@@ -2,7 +2,9 @@ package br.com.sotos.controller;
 
 import br.com.sotos.DAO.DrPessoasDAO;
 import br.com.sotos.model.DrPessoas;
+import br.com.sotos.utils.Util;
 import com.google.gson.Gson;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -23,8 +25,11 @@ public class DrPessoasController {
     @GET
     @Path("insert")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insert(@QueryParam("json") String json) {
+    public String insert(@QueryParam("json") String json) throws NoSuchAlgorithmException {
         DrPessoas drPessoas = gson.fromJson(json, DrPessoas.class);
+        String new_password = drPessoas.getPes_password() + "$otaoDaMa$$a2015";
+        Util utl = new Util();
+        drPessoas.setPes_password(utl.convertPasswordToMD5(new_password));
         dao.insert(drPessoas);
 
         return gson.toJson(drPessoas, DrPessoas.class);
@@ -43,8 +48,11 @@ public class DrPessoasController {
     @GET
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
-    public String update(@QueryParam("json") String json) {
+    public String update(@QueryParam("json") String json) throws NoSuchAlgorithmException {
         DrPessoas drPessoas = gson.fromJson(json, DrPessoas.class);
+        String new_password = drPessoas.getPes_password() + "$otaoDaMa$$a2015";
+        Util utl = new Util();
+        drPessoas.setPes_password(utl.convertPasswordToMD5(new_password));
         dao.update(drPessoas);
 
         return gson.toJson(drPessoas, DrPessoas.class);
