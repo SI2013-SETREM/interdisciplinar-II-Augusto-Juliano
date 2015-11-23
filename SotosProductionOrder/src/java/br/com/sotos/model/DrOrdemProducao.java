@@ -32,6 +32,12 @@ public class DrOrdemProducao implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ord_dataproducao;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ord_dataentrega;
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date ord_datacadastro;
+
     public int getOrd_codigo() {
         return ord_codigo;
     }
@@ -64,7 +70,12 @@ public class DrOrdemProducao implements Serializable {
         this.ord_dataentrega = ord_dataentrega;
     }
 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date ord_dataentrega;
+    public Date getOrd_datacadastro() {
+        return ord_datacadastro;
+    }
+
+    public void setOrd_datacadastro(Date ord_datacadastro) {
+        this.ord_datacadastro = ord_datacadastro;
+    }
 
 }

@@ -61,8 +61,8 @@ public class DrProduto implements Serializable {
     public void setDrColecao(DrColecao drColecao) {
         this.drColecao = drColecao;
     }
-    
-        public int getPro_codigopro() {
+
+    public int getPro_codigopro() {
         return pro_codigopro;
     }
 

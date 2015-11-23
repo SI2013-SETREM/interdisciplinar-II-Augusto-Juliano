@@ -1,8 +1,18 @@
 package br.com.sotos.controller;
 
 import br.com.sotos.DAO.DrProdutoDAO;
+import br.com.sotos.DAO.DrProdutoFinalDAO;
+import br.com.sotos.model.DrCor;
 import br.com.sotos.model.DrProduto;
+import br.com.sotos.model.DrProdutoCores;
+import br.com.sotos.model.DrProdutoFinal;
+import br.com.sotos.model.DrProdutoTamanho;
 import com.google.gson.Gson;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -65,6 +75,42 @@ public class DrProdutoController {
     public String findByAll() {
         List<DrProduto> lstDrProduto = dao.findAll();
 
+        return gson.toJson(lstDrProduto);
+    }
+
+    @GET
+    @Path("createChildrens")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String createChildrens() {
+        DrProdutoFinalDAO daoPF = new DrProdutoFinalDAO(DrProdutoFinal.class);
+        List<DrProduto> lstDrProduto = dao.findAll();
+        for (DrProduto drProduto : lstDrProduto) {
+            List<DrProdutoCores> lstDrCor = dao.getCores(drProduto);
+            List<DrProdutoTamanho> lstDrTam = dao.getTamanhos(drProduto);
+            if (lstDrCor.size() > 0 && lstDrTam.size() > 0) {
+                for (DrProdutoCores cor : lstDrCor) {
+                    for (DrProdutoTamanho tamanho : lstDrTam) {
+                        DrProdutoFinal finalPro = new DrProdutoFinal();
+                        finalPro.setDrCor(cor.getDrCor());
+                        finalPro.setDrProduto(drProduto);
+                        finalPro.setDrTamanho(tamanho.getDrTamanho());
+                        String pro_codigoref = String.valueOf(drProduto.getPro_codigopro());
+                        pro_codigoref += '-';
+                        pro_codigoref += cor.getDrCor().getCor_codigocor();
+                        pro_codigoref += '-';
+                        pro_codigoref += tamanho.getDrTamanho().getTam_sigla();
+                        finalPro.setPro_codigoref(pro_codigoref);
+                        finalPro.setPro_descricao(drProduto.getPro_descricao() + ' ' + cor.getDrCor().getCor_descricao() + ' ' + tamanho.getDrTamanho().getTam_sigla());
+                        finalPro.setPro_valorvenda(drProduto.getPro_valorvenda());
+                        finalPro.setPro_datacadastro(new Date());
+                        DrProdutoFinal drProdutoFinal = daoPF.findByProCodigoRef(finalPro.getPro_codigoref());
+                        if (drProdutoFinal == null) {
+                            daoPF.insert(finalPro);
+                        }
+                    }
+                }
+            }
+        }
         return gson.toJson(lstDrProduto);
     }
 }

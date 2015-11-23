@@ -331,6 +331,18 @@ app.controller("drProdutoController", function($scope, $http) {
         });
     };
 
+    $scope.createChildrens = function() {
+        bootbox.confirm("Deseja realmente iniciar o processo para gerar todos os produtos finais?", function(ok) {
+            if (ok) {
+                $http.get("ws/DrProdutoController/createChildrens", {method: "GET"}).then(function(response) {
+                    bootbox.alert("Registros inseridos com Sucesso!", function() {
+                        $scope.requestPage('lst/drProdutoFinalLst');
+                    });
+                });
+            }
+        });
+    }
+
     $scope.delete = function(drProduto) {
         bootbox.confirm("Deseja realmente excluir o registro?", function(ok) {
             if (ok) {
