@@ -3,6 +3,8 @@ package br.com.sotos.controller;
 import br.com.sotos.DAO.DrProdutoFinalDAO;
 import br.com.sotos.model.DrProdutoFinal;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.text.DateFormat;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,7 +20,8 @@ import javax.ws.rs.core.MediaType;
 public class DrProdutoFinalController {
 
     private final DrProdutoFinalDAO dao = new DrProdutoFinalDAO(DrProdutoFinal.class);
-    private final Gson gson = new Gson();
+//    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
 
     @GET
     @Path("insert")
