@@ -34,6 +34,16 @@ public class DrLog implements Serializable {
     private Date log_datetime;
     private String log_valorantigo;
     private String log_valornovo;
+    private String log_tabela;
+    private int log_idtabela;
+
+    public int getLog_idtabela() {
+        return log_idtabela;
+    }
+
+    public void setLog_idtabela(int log_idtabela) {
+        this.log_idtabela = log_idtabela;
+    }
 
     public int getLog_codigo() {
         return log_codigo;
@@ -90,6 +100,5 @@ public class DrLog implements Serializable {
     public void setLog_tabela(String log_tabela) {
         this.log_tabela = log_tabela;
     }
-    private String log_tabela;
 
 }
