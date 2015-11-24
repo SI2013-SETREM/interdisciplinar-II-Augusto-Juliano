@@ -21,49 +21,49 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("DrOrdemProducaoController")
 public class DrOrdemProducaoController {
-    
+
     private final DrOrdemProducaoDAO dao = new DrOrdemProducaoDAO(DrOrdemProducao.class);
     private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
-    
+
     @GET
     @Path("insert")
     @Produces(MediaType.APPLICATION_JSON)
     public String insert(@QueryParam("json") String json) {
         DrOrdemProducao drOrdemProducao = gson.fromJson(json, DrOrdemProducao.class);
         dao.insert(drOrdemProducao);
-        
+
         return gson.toJson(drOrdemProducao, DrOrdemProducao.class);
     }
-    
+
     @GET
     @Path("delete")
     @Produces(MediaType.APPLICATION_JSON)
     public String delete(@QueryParam("json") String json) {
         DrOrdemProducao drOrdemProducao = gson.fromJson(json, DrOrdemProducao.class);
         dao.delete(drOrdemProducao);
-        
+
         return gson.toJson(drOrdemProducao, DrOrdemProducao.class);
     }
-    
+
     @GET
     @Path("update")
     @Produces(MediaType.APPLICATION_JSON)
     public String update(@QueryParam("json") String json) {
         DrOrdemProducao drOrdemProducao = gson.fromJson(json, DrOrdemProducao.class);
         dao.update(drOrdemProducao);
-        
+
         return gson.toJson(drOrdemProducao, DrOrdemProducao.class);
     }
-    
+
     @GET
     @Path("findById")
     @Produces(MediaType.APPLICATION_JSON)
     public String findById(@QueryParam("id") int id) {
         DrOrdemProducao drOrdemProducao = dao.findById(id);
-        
+
         return gson.toJson(drOrdemProducao, DrOrdemProducao.class);
     }
-    
+
     @GET
     @Path("findAll")
     @Produces(MediaType.APPLICATION_JSON)
@@ -79,17 +79,15 @@ public class DrOrdemProducaoController {
         }
         return gson.toJson(lstDrOrdemProducao);
     }
-    
+
     @GET
     @Path("insertOrders")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertOrders(@QueryParam("json") String json) {        
-        List<JsonObject> objects = gson.fromJson(json, new TypeToken<List<JsonObject>>(){}.getType());
-//        dao.insertOrders(objects);
-        for (JsonObject object : objects) {
-            System.out.println(object.get("tam_codigo"));
-        }
-        
+    public String insertOrders(@QueryParam("json") String json) {
+        List<JsonObject> objects = gson.fromJson(json, new TypeToken<List<JsonObject>>() {
+        }.getType());
+        dao.insertOrders(objects);
+
         return gson.toJson(objects);
     }
 }
