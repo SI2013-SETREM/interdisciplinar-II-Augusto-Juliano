@@ -83,7 +83,7 @@ public class DrOrdemProducaoController {
     @GET
     @Path("insertOrders")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertOrders(@QueryParam("json") String json, @QueryParam("drOrdemProducao") String drOrdemProducaoJson) {
+    public String insertOrders(@QueryParam("json") String json, @QueryParam("drOrdemProducao") String drOrdemProducaoJson) throws Exception {
         List<JsonObject> objects = gson.fromJson(json, new TypeToken<List<JsonObject>>() {
         }.getType());
         
