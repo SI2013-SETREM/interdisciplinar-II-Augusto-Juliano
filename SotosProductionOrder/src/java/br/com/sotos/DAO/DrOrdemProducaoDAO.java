@@ -1,7 +1,9 @@
 package br.com.sotos.DAO;
 
 import br.com.sotos.model.DrOrdemProducao;
+import br.com.sotos.model.DrProduto;
 import com.google.gson.JsonObject;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,14 +21,18 @@ public class DrOrdemProducaoDAO extends DAO<DrOrdemProducao> {
     public void insertOrders(List<JsonObject> objects){
         Session session = super.getSession();
         Transaction t = session.beginTransaction();
+        DrOrdemProducao drOrdemProducao = new DrOrdemProducao();
+        drOrdemProducao.setOrd_datacadastro(new Date());
+        //drOrdemProducao.setOrd_dataentrega(objects.get(0).get("ord_dataproducao"));
+        
         for (JsonObject object : objects) {
-            DrOrdemProducao drOrdemProducao = new DrOrdemProducao();
+            
             
             //TODO: Código cabuloso aqui...        
             
-            session.save(drOrdemProducao);
+            //session.save(drOrdemProducao);
         }
-        t.commit();
+        //t.commit();
         session.close();
     }
 

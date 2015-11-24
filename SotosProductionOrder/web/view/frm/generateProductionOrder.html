@@ -19,18 +19,33 @@
             <form role="form">
                 <div class="form-group">
                     <label>Produto</label>
-                    <select class="form-control" name="drProduto" ng-model="drOrdemProducao.drProduto" ng-options="drProduto.pro_descricao for drProduto in drProdutoLst track by drProduto.pro_codigo" required>
+                    <select class="form-control" name="drProduto" ng-model="drOrdemProducao.drProduto" ng-options="drProduto.pro_codigopro+' - '+drProduto.pro_descricao for drProduto in drProdutoLst track by drProduto.pro_codigo" required>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Data Inicial</label>
-                    <input class="form-control" type="date" ng-model="drOrdemProducao.ord_datainicial" id="ord_datainicial" required>
+                    <label>Data de Término da Produção</label>
+                    <input class="form-control" type="date" ng-model="drOrdemProducao.ord_dataproducao" id="ord_dataproducao" required>
                 </div>
                 <div class="form-group">
-                    <label>Data Final</label>
-                    <input class="form-control" type="date" ng-model="drOrdemProducao.ord_datafinal" id="ord_datafinal" required>
+                    <label>Data de Entrega</label>
+                    <input class="form-control" type="date" ng-model="drOrdemProducao.ord_dataentrega" id="ord_dataentrega" required>
                 </div>
-                <button type="button" ng-click="findRecords();" class="btn btn-primary"><i class="fa fa-search"></i>Buscar</button>
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea class="form-control" type="textarea" ng-model="drOrdemProducao.ord_observacao" id="ord_observacao"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="" for="ord_impressa">Imprimir ao Salvar?</label>
+                    <input style="padding-top: 10px;" type="checkbox" name="ord_impressa" ng-model="drOrdemProducao.ord_impressa" id="ord_impressa" />
+                </div>
+                <div class="form-group">
+                    <label>Situação</label>
+                    <select class="form-control" name="ord_situacao" ng-model="drOrdemProducao.ord_situacao" required>
+                        <option value='P'>Em Produção</option>
+                        <option value='F'>Finalizada</option>
+                    </select>
+                </div>
+                <button type="button" ng-click="findRecords();" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;&nbsp;Buscar</button>
                 <button type="button" ng-click="requestPage('lst/drOrdemProducaoLst');" class="btn btn-default">Cancelar</button>
             </form>
         </div>
@@ -43,7 +58,7 @@
                     <thead>
                         <tr>
                             <th>Cor</th>
-                            <th ng-repeat="drTamanho in drTamanhoLst| orderBy : 'tam_ordem' : false ">
+                            <th style='text-align: center; margin-right: 7px;' ng-repeat="drTamanho in drTamanhoLst| orderBy : 'tam_ordem' : false ">
                                 {{drTamanho.tam_sigla}}
                             </th>
                         </tr>
@@ -52,16 +67,16 @@
                         <tr ng-show="drCor.length === 0 && http.pendingRequests.length == 0">
                             <td colspan="1000">Nenhum registro encontrado :(</td>
                         </tr>
-                        <tr ng-repeat="record in records | orderBy : 'drCor.cor_descricao' : false ">
+                        <tr ng-repeat="record in records| orderBy : 'drCor.cor_descricao' : false ">
                             <td>{{record.drCor.cor_descricao}}</td>
                             <td ng-repeat="drTamanho in record.drTamanhoLst| orderBy : 'tam_ordem' : false ">
-                                <input type="number" ng-model="drTamanho.qtde">
+                                <input style='text-align: center; font-weight: bold; ' type="number" ng-model="drTamanho.qtde">
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <button type="button" ng-click="saveProductionOrder();" class="btn btn-primary"><i class="fa fa-save"></i>Salvar</button>
+            <button type="button" ng-click="saveProductionOrder();" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Salvar</button>
         </div>
     </div>
 </div>

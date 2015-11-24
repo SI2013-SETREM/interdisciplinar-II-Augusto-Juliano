@@ -291,7 +291,6 @@ app.controller("drOrdemProducaoController", function ($scope, $http) {
                 $scope.saveList.push(obj);
             });
         });
-        console.log($scope.saveList);
 
 
         $http({
