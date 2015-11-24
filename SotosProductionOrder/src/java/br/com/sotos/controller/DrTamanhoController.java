@@ -67,4 +67,13 @@ public class DrTamanhoController {
 
         return gson.toJson(lstDrTamanho);
     }
+    
+    @GET
+    @Path("findByProCodigo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String findByProCodigo(@QueryParam("pro_codigo") int pro_codigo) {
+        List<DrTamanho> drTamanhoLst = dao.findByProCodigo(pro_codigo);
+
+        return gson.toJson(drTamanhoLst);
+    }
 }

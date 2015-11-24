@@ -6,6 +6,8 @@ import br.com.sotos.model.DrOrdemProducao;
 import br.com.sotos.model.DrOrdemProdutos;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -76,5 +78,18 @@ public class DrOrdemProducaoController {
             }
         }
         return gson.toJson(lstDrOrdemProducao);
+    }
+    
+    @GET
+    @Path("insertOrders")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String insertOrders(@QueryParam("json") String json) {        
+        List<JsonObject> objects = gson.fromJson(json, new TypeToken<List<JsonObject>>(){}.getType());
+//        dao.insertOrders(objects);
+        for (JsonObject object : objects) {
+            System.out.println(object.get("tam_codigo"));
+        }
+        
+        return gson.toJson(objects);
     }
 }

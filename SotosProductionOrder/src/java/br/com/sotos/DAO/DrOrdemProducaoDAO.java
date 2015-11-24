@@ -11,5 +11,7 @@ public class DrOrdemProducaoDAO extends DAO<DrOrdemProducao> {
     public DrOrdemProducaoDAO(Class<DrOrdemProducao> typeClass) {
         super(typeClass);
     }
+    
+    
 
 }
