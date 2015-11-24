@@ -17,6 +17,7 @@
     <div class="row">
         <div class="col-lg-6">
             <form role="form">
+                <input class="form-control hidden" value="0" ng-model="drOrdemProducao.ord_codigo" id="ord_codigo">
                 <div class="form-group">
                     <label>Produto</label>
                     <select class="form-control" name="drProduto" ng-model="drOrdemProducao.drProduto" ng-options="drProduto.pro_codigopro+' - '+drProduto.pro_descricao for drProduto in drProdutoLst track by drProduto.pro_codigo" required>
@@ -64,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-show="drCor.length === 0 && http.pendingRequests.length == 0">
+                        <tr ng-show="drCor.length === 0 && http.pendingRequests.length === 0">
                             <td colspan="1000">Nenhum registro encontrado :(</td>
                         </tr>
                         <tr ng-repeat="record in records| orderBy : 'drCor.cor_descricao' : false ">

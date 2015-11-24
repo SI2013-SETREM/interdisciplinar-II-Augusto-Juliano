@@ -297,7 +297,8 @@ app.controller("drOrdemProducaoController", function ($scope, $http) {
             method: "GET",
             url: "ws/DrOrdemProducaoController/insertOrders",
             params: {
-                json: JSON.stringify($scope.saveList)
+                json: JSON.stringify($scope.saveList),
+                drOrdemProducao: $scope.drOrdemProducao
             }
         }).then(function (response) {
             bootbox.alert("Ordens de Produção inseridas com Sucesso!", function () {

@@ -83,10 +83,13 @@ public class DrOrdemProducaoController {
     @GET
     @Path("insertOrders")
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertOrders(@QueryParam("json") String json) {
+    public String insertOrders(@QueryParam("json") String json, @QueryParam("drOrdemProducao") String drOrdemProducaoJson) {
         List<JsonObject> objects = gson.fromJson(json, new TypeToken<List<JsonObject>>() {
         }.getType());
-        dao.insertOrders(objects);
+        
+        DrOrdemProducao drOrdemProducao = gson.fromJson(drOrdemProducaoJson, DrOrdemProducao.class);
+        
+        dao.insertOrders(objects, drOrdemProducao);
 
         return gson.toJson(objects);
     }
