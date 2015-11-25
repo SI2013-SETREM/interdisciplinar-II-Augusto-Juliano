@@ -3,17 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/web/controller/sotosApp.js</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/web/view/lst/drProdutoLst.html</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/web/view/frm/drProdutoFrm.html</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/src/java/br/com/sotos/controller/DrColecaoController.java</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/web/view/lst/drCorLst.html</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/web/view/frm/drColecaoFrm.html</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/src/java/br/com/sotos/controller/DrCorController.java</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/src/java/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/web/index.html</file>
-            <file>file:/C:/Users/julianopires/Documents/NetBeans/interdisciplinar-III-Augusto-Juliano/trunk/SotosProductionOrder/web/dashboard.html</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/view/lst/drOrdemProducaoLst.html</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/resources/jsPDF/libs/FileSaver.js/FileSaver.min.js</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/view/frm/drEtapasProducaoFrm.html</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/resources/jsPDF/libs/Blob.js/BlobBuilder.min.js</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/src/java/br/com/sotos/controller/DrOrdemProducaoController.java</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/src/java/br/com/sotos/DAO/DrOrdemProducaoDAO.java</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/resources/jsPDF/libs/Blob.js/Blob.js</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/resources/jsPDF/libs/FileSaver.js/FileSaver.js</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/resources/jsPDF/libs/Deflate/adler32cs.js</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/resources/jsPDF/libs/Blob.js/BlobBuilder.js</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/view/lst/drPessoasLst.html</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/controller/sotosApp.js</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/resources/jsPDF/libs/Deflate/deflate.js</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/view/lst/drOrdemProdutosLst.html</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/view/frm/drProdutoFinalFrm.html</file>
+            <file>file:/C:/Users/juliano/Documents/NetBeansProject/Sotos/trunk/SotosProductionOrder/web/dashboard.html</file>
         </group>
     </open-files>
 </project-private>
