@@ -23,6 +23,13 @@ public class DrOrdemProducaoDAO extends DAO<DrOrdemProducao> {
         super(typeClass);
     }
 
+    public List<DrOrdemProducao> findByOrdSituacao(String ord_situacao) {
+        Session session = super.getSession();
+        List<DrOrdemProducao> list = session.createQuery("from DrOrdemProducao where ord_situacao = '" + ord_situacao + "' order by ord_datacadastro").list();
+        session.close();
+        return list;
+    }
+    
     public void insertOrders(List<JsonObject> objects, DrOrdemProducao drOrdemProducao) throws Exception {
         Session session = super.getSession();
         Transaction t = session.beginTransaction();
@@ -64,21 +71,27 @@ public class DrOrdemProducaoDAO extends DAO<DrOrdemProducao> {
 
             List<DrEtapasProduto> drEtapasProdutoLst = etpDAO.findByProCodigo(drOrdemProducao.getDrProduto().getPro_codigo());
             boolean status = true;
-            for (DrEtapasProduto drEtapasProduto : drEtapasProdutoLst) {
+            for (int i = 0; i < drEtapasProdutoLst.size(); i++) {
                 DrEtapaProducao drEtapaProducao = new DrEtapaProducao();
 
-                drEtapaProducao.setDrEtapasProduto(drEtapasProduto);
+                drEtapaProducao.setDrEtapasProduto(drEtapasProdutoLst.get(i));
                 drEtapaProducao.setDrOrdemProducao(drOrdemProducao);
                 drEtapaProducao.setEpp_status(status);
-
+                if (i == 0) {
+                    drEtapaProducao.setEpp_datainicio(new Date());
+                }
+                if ("F".equals(drOrdemProducao.getOrd_situacao())) {
+                    drEtapaProducao.setEpp_datainicio(new Date());
+                    drEtapaProducao.setEpp_datafim(new Date());
+                    drEtapaProducao.setEpp_status(true);
+                }
                 session.save(drEtapaProducao);
                 status = false;
             }
 
             t.commit();
             session.close();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             t.rollback();
             session.close();
             throw new Exception(ex.getMessage(), ex.getCause());

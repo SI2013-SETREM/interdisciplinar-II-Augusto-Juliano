@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -72,10 +73,35 @@ public class DrOrdemProducaoController {
 
         return gson.toJson(lstDrOrdemProducao);
     }
+    
+    @GET
+    @Path("findByOrdSituacao")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String findByOrdSituacao(@QueryParam("ord_situacao") String ord_situacao) {
+        List<DrOrdemProducao> lstDrOrdemProducao = dao.findByOrdSituacao(ord_situacao);
+
+        return gson.toJson(lstDrOrdemProducao);
+    }
+
+    @GET
+    @Path("refreshOrdSituacao")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String refreshOrdSituacao() {
+        List<DrOrdemProducao> lstDrOrdemProducao = dao.findByOrdSituacao("P");
+        for (DrOrdemProducao item : lstDrOrdemProducao) {
+            if (item.getOrd_dataproducao().before(new Date())){
+                item.setOrd_situacao("A");
+                dao.update(item);
+            }
+        }
+        lstDrOrdemProducao = dao.findAll();
+        return gson.toJson(lstDrOrdemProducao);
+    }
 
     @GET
     @Path("insertOrders")
     @Produces(MediaType.APPLICATION_JSON)
+
     public String insertOrders(@QueryParam("json") String json, @QueryParam("drOrdemProducao") String drOrdemProducaoJson) throws Exception {
         List<JsonObject> objects = gson.fromJson(json, new TypeToken<List<JsonObject>>() {
         }.getType());

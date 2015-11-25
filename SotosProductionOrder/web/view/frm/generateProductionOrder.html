@@ -41,9 +41,9 @@
                 </div>
                 <div class="form-group">
                     <label>Situação</label>
-                    <select class="form-control" name="ord_situacao" ng-model="drOrdemProducao.ord_situacao" required>
-                        <option value='P'>Em Produção</option>
-                        <option value='F'>Finalizada</option>
+                    <select id="ord_situacao" class="form-control" name="ord_situacao" ng-model="drOrdemProducao.ord_situacao" required>
+                        <option ng-value="P">Em Produção</option>
+                        <option ng-value="F">Finalizada</option>
                     </select>
                 </div>
                 <button type="button" ng-click="findRecords();" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;&nbsp;Buscar</button>
