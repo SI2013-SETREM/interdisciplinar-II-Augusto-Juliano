@@ -3,6 +3,8 @@ package br.com.sotos.controller;
 import br.com.sotos.DAO.DrOrdemProdutosDAO;
 import br.com.sotos.model.DrOrdemProdutos;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.lang.reflect.Modifier;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 public class DrOrdemProdutosController {
 
     private final DrOrdemProdutosDAO dao = new DrOrdemProdutosDAO(DrOrdemProdutos.class);
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
 
     @GET
     @Path("insert")
@@ -64,6 +66,15 @@ public class DrOrdemProdutosController {
     @Produces(MediaType.APPLICATION_JSON)
     public String findByAll() {
         List<DrOrdemProdutos> lstDrOrdemProdutos = dao.findAll();
+
+        return gson.toJson(lstDrOrdemProdutos);
+    }
+
+    @GET
+    @Path("findByOrdCodigo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String findByOrdCodigo(@QueryParam("ord_codigo") int ord_codigo) {
+        List<DrOrdemProdutos> lstDrOrdemProdutos = dao.findByOrdCodigo(ord_codigo);
 
         return gson.toJson(lstDrOrdemProdutos);
     }

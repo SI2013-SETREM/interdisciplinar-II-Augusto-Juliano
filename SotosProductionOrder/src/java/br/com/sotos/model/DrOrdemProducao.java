@@ -2,20 +2,15 @@ package br.com.sotos.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.validation.constraints.Max;
 
 /**
  *
@@ -47,11 +42,11 @@ public class DrOrdemProducao implements Serializable {
     private Boolean ord_impressa;
     private String ord_situacao;
     
-    @OneToMany(mappedBy = "drOrdemProducao", targetEntity = DrEtapaProducao.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<DrEtapaProducao> lstDrEtapaProducao;
-    
-    @OneToMany(mappedBy = "drOrdemProducao", targetEntity = DrOrdemProdutos.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<DrOrdemProdutos> lstDrOrdemProdutos;
+//    @OneToMany(mappedBy = "drOrdemProducao", targetEntity = DrEtapaProducao.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private List<DrEtapaProducao> lstDrEtapaProducao;
+//    
+//    @OneToMany(mappedBy = "drOrdemProducao", targetEntity = DrOrdemProdutos.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private List<DrOrdemProdutos> lstDrOrdemProdutos;
 
     public int getOrd_codigo() {
         return ord_codigo;
@@ -115,21 +110,5 @@ public class DrOrdemProducao implements Serializable {
 
     public void setOrd_situacao(String ord_situacao) {
         this.ord_situacao = ord_situacao;
-    }
-    
-    public List<DrEtapaProducao> getLstDrEtapaProducao() {
-        return lstDrEtapaProducao;
-    }
-
-    public void setLstDrEtapaProducao(List<DrEtapaProducao> lstDrEtapaProducao) {
-        this.lstDrEtapaProducao = lstDrEtapaProducao;
-    }
-
-    public List<DrOrdemProdutos> getLstDrOrdemProdutos() {
-        return lstDrOrdemProdutos;
-    }
-
-    public void setLstDrOrdemProdutos(List<DrOrdemProdutos> lstDrOrdemProdutos) {
-        this.lstDrOrdemProdutos = lstDrOrdemProdutos;
     }
 }

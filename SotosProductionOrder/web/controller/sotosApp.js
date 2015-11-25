@@ -280,6 +280,39 @@ app.controller("drOrdemProducaoController", function ($scope, $http) {
         });
     };
 
+    $scope.findItens = function () {
+        if ($scope.drOrdemProducao.drProduto) {
+            $http.get("ws/DrCorController/findByProCodigo", {method: "GET", params: {pro_codigo: $scope.drOrdemProducao.drProduto.pro_codigo}}).then(function (response) {
+                $scope.drCorLst = response.data;
+            }).then(function (response) {
+                $http.get("ws/DrTamanhoController/findByProCodigo", {method: "GET", params: {pro_codigo: $scope.drOrdemProducao.drProduto.pro_codigo}}).then(function (response) {
+                    $scope.drTamanhoLst = response.data;
+                }).then(function (response) {
+                    $http.get("ws/DrOrdemProdutosController/findByOrdCodigo", {method: "GET", params: {ord_codigo: $scope.drOrdemProducao.ord_codigo}}).then(function (response) {
+                        $scope.drOrdemProdutosLst = response.data;
+                    }).then(function (response) {
+                        debugger;
+                        $scope.drCorLst.forEach(function (drCor) {
+                            var obj = {};
+                            obj.drCor = drCor;
+                            obj.drTamanhoLst = JSON.parse(JSON.stringify($scope.drTamanhoLst));// Método simples de clonar objeto sem referenciá-lo
+
+                            obj.drTamanhoLst.forEach(function (drTamanho) {
+                                $scope.drOrdemProdutosLst.forEach(function (drOrdemProduto) {
+                                    if (drOrdemProduto.drProdutoFinal.drTamanho.tam_codigo === drTamanho.tam_codigo && obj.drCor.cor_codigo === drOrdemProduto.drProdutoFinal.drCor.cor_codigo) {
+                                        drTamanho.qtde = drOrdemProduto.opr_quantidade;
+                                    }
+                                });
+                            });
+
+                            $scope.records.push(obj);
+                        });
+                    });
+                });
+            });
+        }
+    };
+
     $scope.saveProductionOrder = function () {
         $scope.saveList = [];
         $scope.records.forEach(function (record) {
@@ -328,6 +361,9 @@ app.controller("drOrdemProducaoController", function ($scope, $http) {
 
     $scope.loadDrOrdemProducaoLst();
     $scope.loadDrProdutoLst();
+    if ($("#drOrdemProdutosLst")) {
+        $scope.findItens();
+    }
 });
 
 app.controller("drSetorController", function ($scope, $http) {

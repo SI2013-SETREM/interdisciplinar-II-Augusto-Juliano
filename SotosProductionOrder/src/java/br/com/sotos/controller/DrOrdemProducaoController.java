@@ -69,14 +69,7 @@ public class DrOrdemProducaoController {
     @Produces(MediaType.APPLICATION_JSON)
     public String findByAll() {
         List<DrOrdemProducao> lstDrOrdemProducao = dao.findAll();
-        for (DrOrdemProducao item : lstDrOrdemProducao) {
-            for (DrEtapaProducao prod : item.getLstDrEtapaProducao()) {
-                prod.setDrOrdemProducao(null);
-            }
-            for (DrOrdemProdutos prod : item.getLstDrOrdemProdutos()) {
-                prod.setDrOrdemProducao(null);
-            }
-        }
+
         return gson.toJson(lstDrOrdemProducao);
     }
 
@@ -86,9 +79,9 @@ public class DrOrdemProducaoController {
     public String insertOrders(@QueryParam("json") String json, @QueryParam("drOrdemProducao") String drOrdemProducaoJson) throws Exception {
         List<JsonObject> objects = gson.fromJson(json, new TypeToken<List<JsonObject>>() {
         }.getType());
-        
+
         DrOrdemProducao drOrdemProducao = gson.fromJson(drOrdemProducaoJson, DrOrdemProducao.class);
-        
+
         dao.insertOrders(objects, drOrdemProducao);
 
         return gson.toJson(objects);

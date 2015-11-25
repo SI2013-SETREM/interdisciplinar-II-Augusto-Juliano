@@ -98,12 +98,12 @@
                         <tr ng-repeat="drOrdemProducao in drOrdemProducaoLst| orderBy:sortType:sortReverse | filter:search">
                             <td>{{drOrdemProducao.drProduto.pro_codigopro}}</td>
                             <td>{{drOrdemProducao.drProduto.pro_descricao}}</td>
-                            <td>{{drOrdemProducao.ord_dataproducao | date : 'dd/MM/yyyy' : '+0300'}}</td>
-                            <td>{{drOrdemProducao.ord_dataentrega | date : 'dd/MM/yyyy' : '+0300'}}</td>
+                            <td>{{drOrdemProducao.ord_dataproducao| date : 'dd/MM/yyyy' : '+0300'}}</td>
+                            <td>{{drOrdemProducao.ord_dataentrega| date : 'dd/MM/yyyy' : '+0300'}}</td>
                             <td>{{drOrdemProducao.ord_impressa ? "Sim" : "Não"}}</td>
                             <td>{{drOrdemProducao.ord_situacao == "P" ? "Em Produção" : drOrdemProducao.ord_situacao == "C" ? "Cancelada" : drOrdemProducao.ord_situacao == "F" ? "Finalizada" : drOrdemProducao.ord_situacao == "A" ? "Atrasada" : "Não Identificado"}}</td>
                             <td class="text-center">
-                                <a href="#" ng-click="">
+                                <a href="#" ng-click="requestPage('lst/drOrdemProdutosLst', 'ordemprodutos', drOrdemProducao);">
                                     <i class="fa fa-tags"></i>
                                 </a>
                             </td>
