@@ -74,10 +74,6 @@ public class DrEtapaProducaoController {
     @Produces(MediaType.APPLICATION_JSON)
     public String findByOrdCodigo(@QueryParam("ord_codigo") int ord_codigo) {
         List<DrEtapaProducao> lstEtapaProducao = dao.findByOrdCodigo(ord_codigo);
-        for (DrEtapaProducao item : lstEtapaProducao) {
-            item.getDrOrdemProducao().setLstDrEtapaProducao(null);
-            item.getDrOrdemProducao().setLstDrOrdemProdutos(null);
-        }
         return gson.toJson(lstEtapaProducao);
     }
 }

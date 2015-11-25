@@ -808,6 +808,31 @@ app.controller("drProdutoTamanhosController", function ($scope, $http) {
     $scope.loadDrTamanhoLst();
 });
 
+app.controller("drEtapaProducaoController", function ($scope, $http) {
+    $scope.drEtapaProducaoLst = [];
+    $scope.drSetorLst = [];
+    $scope.sortType = "tam_sigla";
+    $scope.sortReverse = false;
+    $scope.search = "";
+    $scope.drOrdemProducao = $scope.$parent.model;
+    $scope.http = $http;
+
+    $scope.loadDrEtapaProducaoLst = function () {
+        $http.get("ws/DrEtapaProducaoController/findByOrdCodigo", {method: "GET", params: {ord_codigo: $scope.drOrdemProducao.ord_codigo}}).then(function (response) {
+            $scope.drEtapaProducaoLst = response.data;
+        });
+    };
+
+    $scope.loadDrSetorLst = function () {
+        $http.get("ws/DrSetorController/findAll", {method: "GET"}).then(function (response) {
+            $scope.drSetorLst = response.data;
+        });
+    };
+
+    $scope.loadDrEtapaProducaoLst();
+    $scope.loadDrSetorLst();
+});
+
 app.controller("drPessoasController", function ($scope, $http) {
     $scope.drPessoasLst = [];
     $scope.drSetorLst = [];
