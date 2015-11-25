@@ -3,6 +3,7 @@ package br.com.sotos.controller;
 import br.com.sotos.DAO.DrEtapaProducaoDAO;
 import br.com.sotos.model.DrEtapaProducao;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 public class DrEtapaProducaoController {
 
     private final DrEtapaProducaoDAO dao = new DrEtapaProducaoDAO(DrEtapaProducao.class);
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
 
     @GET
     @Path("insert")
@@ -66,5 +67,17 @@ public class DrEtapaProducaoController {
         List<DrEtapaProducao> lstDrEtapaProducao = dao.findAll();
 
         return gson.toJson(lstDrEtapaProducao);
+    }
+
+    @GET
+    @Path("findByOrdCodigo")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String findByOrdCodigo(@QueryParam("ord_codigo") int ord_codigo) {
+        List<DrEtapaProducao> lstEtapaProducao = dao.findByOrdCodigo(ord_codigo);
+        for (DrEtapaProducao item : lstEtapaProducao) {
+            item.getDrOrdemProducao().setLstDrEtapaProducao(null);
+            item.getDrOrdemProducao().setLstDrOrdemProdutos(null);
+        }
+        return gson.toJson(lstEtapaProducao);
     }
 }

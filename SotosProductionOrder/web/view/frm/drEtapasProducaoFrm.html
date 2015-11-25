@@ -1,0 +1,72 @@
+<div ng-controller="drEtapaProducaoController">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Sequência Operacional da Ordem de Produção
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="index.html">Início</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Sequência Operacional
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a href="#" ng-click="sortType = 'epp_datainicio';
+                                            sortReverse = !sortReverse">
+                                    Data de Início
+                                    <span ng-show="sortType === 'epp_datainicio' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'epp_datainicio' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'epp_datafim';
+                                            sortReverse = !sortReverse">
+                                    Data de Finalização
+                                    <span ng-show="sortType === 'epp_datafim' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'epp_datafim' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'set_descricao';
+                                            sortReverse = !sortReverse">
+                                    Setor
+                                    <span ng-show="sortType === 'set_descricao' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'set_descricao' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th style="text-align: center;">
+                                <a href="#" ng-click="sortType = 'epp_status';
+                                            sortReverse = !sortReverse">
+                                    Situação
+                                    <span ng-show="sortType === 'epp_status' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType === 'epp_status' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="drEtapaProducao.length === 0 && http.pendingRequests.length == 0">
+                            <td colspan="1000">Nenhum registro encontrado :(</td>
+                        </tr>
+                        <tr ng-repeat="drEtapaProducao in drEtapaProducaoLst| orderBy:sortType:sortReverse | filter:search">
+                            <td>{{drEtapaProducao.epp_datainicio| date : 'dd/MM/yyyy' : '+0300'}}</td>
+                            <td>{{drEtapaProducao.epp_datafim| date : 'dd/MM/yyyy' : '+0300'}}</td>
+                            <td>{{drEtapaProducao.drEtapasProduto.drSetor.set_descricao}}</td>
+                            <td style="text-align: center;">{{drEtapaProducao.epp_status && drEtapaProducao.epp_datafim == null ? 'Em produção' : drEtapaProducao.epp_status == false && drEtapaProducao.epp_datainicio == null ? 'Aguardando' : 'Concluído'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -57,7 +57,7 @@
                         <li ng-click="activetab = 'dashboard';" ng-class="{
                                 'active'
                                         : activetab === 'dashboard' || activetab === undefined}">
-                            <a href="#"><i class="fa fa-fw fa-dashboard"></i> Painel de Produção</a>
+                            <a href="dashboard.html"><i class="fa fa-fw fa-dashboard"></i> Painel de Produção</a>
                         </li>
                         <li ng-click="requestPage('lst/drPessoasLst');
                                     activetab = 'pessoas';" ng-class="{
@@ -115,11 +115,11 @@
                                                         : activetab === 'ordens'}">
                             <a href="#"><i class="fa fa-fw fa-area-chart"></i> Gestão de Produção</a>
                         </li>
-                        <li ng-click="requestPage('lst/drOrdemProducaoFrm');
+                        <li ng-click="requestPage('frm/generateProductionOrder');
                                     activetab = 'ordemproducao';" ng-class="{
                                                 'active'
                                                         : activetab === 'ordemproducao'}">
-                            <a href="#"><i class="fa fa-fw fa-barcode"></i> Ordem de Produção</a>
+                            <a href="#"><i class="fa fa-fw fa-barcode"></i> Gerar Nova O. P.</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gears"></i> Configurações</a>
