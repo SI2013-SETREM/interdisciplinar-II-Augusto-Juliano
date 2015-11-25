@@ -250,6 +250,9 @@ app.controller("drOrdemProducaoController", function ($scope, $http) {
     $scope.drOrdemProducao = $scope.$parent.model;
     $scope.http = $http;
 
+    $scope.drOrdemProducao.ord_dataproducao = new Date($scope.drOrdemProducao.ord_dataproducao);
+    $scope.drOrdemProducao.ord_dataentrega = new Date($scope.drOrdemProducao.ord_dataentrega);
+
     $scope.loadDrOrdemProducaoLst = function () {
         $http.get("ws/DrOrdemProducaoController/findAll", {method: "GET"}).then(function (response) {
             $scope.drOrdemProducaoLst = response.data;

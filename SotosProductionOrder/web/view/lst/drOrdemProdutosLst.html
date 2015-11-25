@@ -14,6 +14,43 @@
             </ol>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <form role="form">
+                <input class="form-control hidden" value="0" ng-model="drOrdemProducao.ord_codigo" disabled id="ord_codigo">
+                <div class="form-group">
+                    <label>Produto</label>
+                    <select class="form-control" name="drProduto" ng-model="drOrdemProducao.drProduto" disabled ng-options="drProduto.pro_codigopro+' - '+drProduto.pro_descricao for drProduto in drProdutoLst track by drProduto.pro_codigo" required>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Data de Término da Produção</label>
+                    <input class="form-control" type="date" ng-model="drOrdemProducao.ord_dataproducao" id="ord_dataproducao" disabled required>
+                </div>
+                <div class="form-group">
+                    <label>Data de Entrega</label>
+                    <input class="form-control" type="date" ng-model="drOrdemProducao.ord_dataentrega" id="ord_dataentrega" disabled required>
+                </div>
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea class="form-control" type="textarea" ng-model="drOrdemProducao.ord_observacao" id="ord_observacao" disabled></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="" for="ord_impressa">Imprimir ao Salvar?</label>
+                    <input ng-checked="false" style="padding-top: 10px;" type="checkbox" value="false" name="ord_impressa" ng-model="drOrdemProducao.ord_impressa" id="ord_impressa" disabled/>
+                </div>
+                <div class="form-group">
+                    <label>Situação</label>
+                    <select class="form-control" name="ord_situacao" ng-model="drOrdemProducao.ord_situacao" required disabled>
+                        <option value='P'>Em Produção</option>
+                        <option value='F'>Finalizada</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
