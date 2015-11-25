@@ -1,6 +1,7 @@
 package br.com.sotos.DAO;
 
 import br.com.sotos.utils.HibernateUtil;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,6 +14,12 @@ import org.hibernate.Transaction;
  */
 public class DAO<T> {
 
+    private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+    public SimpleDateFormat getFormatter() {
+        return formatter;
+    }
+    
     Class<T> typeClass;
 
     public DAO(Class<T> typeClass) {

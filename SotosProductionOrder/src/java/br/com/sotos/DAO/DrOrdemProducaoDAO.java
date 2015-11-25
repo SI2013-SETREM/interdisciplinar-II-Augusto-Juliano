@@ -8,6 +8,7 @@ import br.com.sotos.model.DrOrdemProdutos;
 import br.com.sotos.model.DrProdutoFinal;
 import br.com.sotos.model.DrTamanho;
 import com.google.gson.JsonObject;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
@@ -30,6 +31,13 @@ public class DrOrdemProducaoDAO extends DAO<DrOrdemProducao> {
         return list;
     }
     
+    public List<DrOrdemProducao> findByOrdSituacao(String ord_situacao, Date dataInicio, Date dataFim) {
+        Session session = super.getSession();
+        List<DrOrdemProducao> list = session.createQuery("from DrOrdemProducao where ord_situacao = '" + ord_situacao + "' and ord_dataentrega between '" + super.getFormatter().format(dataInicio) + "' and '" + super.getFormatter().format(dataFim) + "' order by ord_datacadastro").list();
+        session.close();
+        return list;
+    }
+
     public void insertOrders(List<JsonObject> objects, DrOrdemProducao drOrdemProducao) throws Exception {
         Session session = super.getSession();
         Transaction t = session.beginTransaction();
@@ -91,7 +99,8 @@ public class DrOrdemProducaoDAO extends DAO<DrOrdemProducao> {
 
             t.commit();
             session.close();
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             t.rollback();
             session.close();
             throw new Exception(ex.getMessage(), ex.getCause());

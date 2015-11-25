@@ -77,8 +77,8 @@ public class DrOrdemProducaoController {
     @GET
     @Path("findByOrdSituacao")
     @Produces(MediaType.APPLICATION_JSON)
-    public String findByOrdSituacao(@QueryParam("ord_situacao") String ord_situacao) {
-        List<DrOrdemProducao> lstDrOrdemProducao = dao.findByOrdSituacao(ord_situacao);
+    public String findByOrdSituacao(@QueryParam("ord_situacao") String ord_situacao, @QueryParam("dataInicio") String dataInicio, @QueryParam("dataFim") String dataFim) {
+        List<DrOrdemProducao> lstDrOrdemProducao = dao.findByOrdSituacao(ord_situacao, new Date(Long.parseLong(dataInicio)), new Date(Long.parseLong(dataFim)));
 
         return gson.toJson(lstDrOrdemProducao);
     }

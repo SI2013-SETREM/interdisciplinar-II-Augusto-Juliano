@@ -150,13 +150,13 @@
                         <div style="margin: 0px 0px 15px 0px; height: 50px;" id="divDimissDate" class="breadcrumb">
                             <div style="margin-left: -20px;">
                                 <div class="col-lg-3">
-                                    <input class="form-control" type="date" id="dataInicio">
+                                    <input class="form-control" type="date" ng-model="dataInicio" id="dataInicio">
                                 </div>
                                 <div class="col-lg-3">
-                                    <input class="form-control" type="date" id="dataFim">
+                                    <input class="form-control" type="date" ng-model="dataFim" id="dataFim">
                                 </div>
                                 <div class="col-lg-6">
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-filter"></i></button>
+                                    <button type="button" class="btn btn-primary" ng-click="loadDrOrdemProducaoLst();"><i class="fa fa-filter"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                                                 <i class="fa fa-flag-checkered fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge">0</div>
+                                                <div class="huge" >{{concluida}}</div>
                                                 <div>Concluídas</div>
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@
                                                 <i class="fa fa-wrench fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div id="ordem-lancada" class="huge">0</div>
+                                                <div id="ordem-lancada" class="huge">{{producao}}</div>
                                                 <div>Em Produção</div>
                                             </div>
                                         </div>
@@ -213,7 +213,7 @@
                                                 <i class="fa fa-exclamation-triangle fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge">0</div>
+                                                <div class="huge">{{atrasada}}</div>
                                                 <div>Atrasadas</div>
                                             </div>
                                         </div>
@@ -235,7 +235,7 @@
                                                 <i class="fa fa-remove fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge">0</div>
+                                                <div class="huge">{{cancelada}}</div>
                                                 <div>Canceladas</div>
                                             </div>
                                         </div>
